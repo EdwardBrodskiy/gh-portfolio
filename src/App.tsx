@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
-import { ThemeProvider, CSSReset } from "@chakra-ui/core"
+import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core"
+import { Home } from './home/Home'
 
 function App() {
   return (
     <div className="App">
       <ThemeProvider>
-        <CSSReset />
-        <h1>Hello, World!</h1>
+        <ColorModeProvider>
+          <CSSReset />
+          <Home />
+        </ColorModeProvider>
       </ThemeProvider>
     </div>
   );
