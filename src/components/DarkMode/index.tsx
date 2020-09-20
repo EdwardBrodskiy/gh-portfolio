@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, useColorMode } from '@chakra-ui/core'
 
-export function Example() {
+export function DarkModeToggle() {
     const { colorMode, toggleColorMode } = useColorMode()
     return (
       <header>

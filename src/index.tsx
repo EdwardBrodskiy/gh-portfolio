@@ -1,8 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import * as serviceWorker from './serviceWorker'
+import { BrowserRouter } from 'react-router-dom'
+import './App.css'
+import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core"
+import Routes from './routes'
+
+function App() {
+  return (
+    <ThemeProvider >
+      <ColorModeProvider>
+        <CSSReset />
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+      </ColorModeProvider>
+    </ThemeProvider>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
