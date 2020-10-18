@@ -34,7 +34,7 @@ export function Home() {
       <Box>
         <Heading as='h1' mb={4} >My Public Repos</Heading>
         <List spacing={4} ml={4}>
-          {data.map(repo => <ListItem >{repo.name}</ListItem>)}
+          {data.map(repo => <ListItem key={repo.name}>{repo.name}</ListItem>)}
         </List>
       </Box>
 

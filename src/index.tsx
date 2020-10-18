@@ -2,19 +2,25 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
-import { BrowserRouter } from 'react-router-dom'
+import { Router, Route, Redirect } from 'react-router-dom'
 import './App.css'
 import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core"
 import Routes from './routes'
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
 
 function App() {
   return (
     <ThemeProvider >
       <ColorModeProvider>
         <CSSReset />
-        <BrowserRouter>
-          <Routes />
-        </BrowserRouter>
+        <Router history={history}>
+          <Route key='root' path={`/gh-portfolio`} component={Routes} />
+
+          {/*Not found*/}
+          <Redirect from='*' to='/gh-portfolio' />
+        </Router>
       </ColorModeProvider>
     </ThemeProvider>
   )
