@@ -18,8 +18,7 @@ function App() {
         <Router history={history}>
           <Route key='root' path={`/gh-portfolio`} component={Routes} />
 
-          {/*Not found*/}
-          <Redirect from='*' to='/gh-portfolio' />
+          
         </Router>
       </ColorModeProvider>
     </ThemeProvider>
