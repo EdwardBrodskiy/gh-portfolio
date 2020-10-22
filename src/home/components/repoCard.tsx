@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Heading, List, ListItem, Spinner, Text } from '@chakra-ui/core'
-import { RepoCard } from './components/repoCard';
 
 
-export function Home() {
+export function RepoCard() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [data, setData] = useState([{ name: "" }]);
+  const [data, setData] = useState({ content: '' });
 
   useEffect(() => {
-    fetch("https://api.github.com/users/EdwardBrodskiy/repos")
+    fetch("https://api.github.com/repos/EdwardBrodskiy/digit_classifier/contents/README.md")
       .then(res => res.json())
       .then(
         (result) => {
@@ -26,18 +25,23 @@ export function Home() {
       )
   }, [])
 
+
+
   if (error) {
     return <Text>Somthing went wrong</Text>
   } else if (!isLoaded) {
     return <Spinner />
   } else {
+    let buff = Buffer.from(data.content, 'base64');
+    let text = buff.toString('ascii')
+    const [title, ...rest] = text.split('\n')
     return (
       <Box>
-        <RepoCard />
-        <Heading as='h1' mb={4} >My Public Repos</Heading>
-        <List spacing={4} ml={4}>
-          {data.map(repo => <ListItem key={repo.name}>{repo.name}</ListItem>)}
-        </List>
+        <Heading>
+          {title}
+        </Heading>
+        {rest.map((para, index) => <Text key={index} >{para}</Text>)}
+
       </Box>
 
     );
