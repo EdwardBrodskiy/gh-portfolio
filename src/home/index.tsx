@@ -32,7 +32,7 @@ export function Home() {
       )
   }, [])
 
-  if (error.message != '') {
+  if (error.message !== '') {
     return <Text>Error: {error.message}</Text>
   } else if (!isLoaded) {
     return <Spinner />
@@ -41,6 +41,7 @@ export function Home() {
       <Box>
 
         <Heading as='h1' mb={4} >My Public Repos</Heading>
+        
         <List spacing={4} ml={4}>
           {data.map(repo => <ListItem key={repo.name}><RepoCard repoName={repo.name} /></ListItem>)}
         </List>

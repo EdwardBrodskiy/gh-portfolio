@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/core'
 import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { classicNameResolver } from 'typescript'
 import { About } from './about'
 import { Header } from './components/header'
 import { Home } from './home'

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
-import { Router, Route, Redirect } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 import './App.css'
 import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core"
 import Routes from './routes'

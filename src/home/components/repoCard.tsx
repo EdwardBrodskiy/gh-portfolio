@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Heading, List, ListItem, Spinner, Text } from '@chakra-ui/core'
+import { Spinner, Text, Image, Flex, useColorMode } from '@chakra-ui/core'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
 
@@ -12,6 +12,9 @@ export function RepoCard({ repoName }: Props) {
   const [error, setError] = useState({ message: '' })
   const [isLoaded, setIsLoaded] = useState(false)
   const [data, setData] = useState({ content: '' })
+
+  const { colorMode } = useColorMode()
+  const bgColor = { light: 'gray.200', dark: 'gray.700' }
 
   useEffect(() => {
     fetch(`https://api.github.com/repos/EdwardBrodskiy/${repoName}/contents/README.md`)
@@ -36,11 +39,11 @@ export function RepoCard({ repoName }: Props) {
           setIsLoaded(true)
         }
       )
-  }, [])
+  })
 
 
 
-  if (error.message != '') {
+  if (error.message !== '') {
     return <Text>Error: {error.message}</Text>
   } else if (!isLoaded) {
     return <Spinner />
@@ -49,12 +52,12 @@ export function RepoCard({ repoName }: Props) {
     let text = buff.toString('ascii')
 
     return (
-      <Box>
+      <Flex align='row' rounded={20} overflow='hidden' bg={bgColor[colorMode]} >
+        <Image width='md' src='https://github.com/EdwardBrodskiy/MandelBrotSet/raw/master/Sample%20images/set%20of%204.png' alt='test' mr={4}/>
         <ErrorBoundary>
           <MarkDownSnippet markDown={text} />
         </ErrorBoundary>
-        
-      </Box>
+      </Flex>
 
     )
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Heading, List, ListItem, Spinner, Text } from '@chakra-ui/core'
+import { Box, Heading, Text } from '@chakra-ui/core'
 
 type Props = {
   markDown: String
@@ -8,7 +8,7 @@ type Props = {
 
 export function MarkDownSnippet({ markDown }: Props) {
 
-  const [title, first_para, ...rest] = markDown.split('\n\n')
+  const [title, first_para] = markDown.split('\n\n')
 
   const trimed_title = title.slice(2)
 
