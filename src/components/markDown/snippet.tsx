@@ -1,12 +1,12 @@
 import React from 'react'
-import { Box, Heading, Text } from '@chakra-ui/core'
+import { Box, BoxProps, Heading, Text } from '@chakra-ui/core'
 
 type Props = {
   markDown: String
 }
 
 
-export function MarkDownSnippet({ markDown }: Props) {
+export function MarkDownSnippet({ markDown, ...rest }: Props & BoxProps) {
 
   const [title, first_para] = markDown.split('\n\n')
 
@@ -15,7 +15,7 @@ export function MarkDownSnippet({ markDown }: Props) {
   const split_first_para = first_para.split('\n')
 
   return (
-    <Box>
+    <Box {...rest}>
       <Heading>{trimed_title}</Heading>
       {split_first_para.map((line, index) => <Text key={index}>{line}</Text>)}
     </Box>

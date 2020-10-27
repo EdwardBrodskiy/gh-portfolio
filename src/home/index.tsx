@@ -42,8 +42,8 @@ export function Home() {
 
         <Heading as='h1' mb={4} >My Public Repos</Heading>
         
-        <List spacing={4} ml={4}>
-          {data.map(repo => <ListItem key={repo.name}><RepoCard repoName={repo.name} /></ListItem>)}
+        <List spacing={8} ml={4}>
+          {data.map((repo, index) => <ListItem key={repo.name}><RepoCard repoName={repo.name} isRight={!!(index%2)} /></ListItem>)}
         </List>
       </Box>
 

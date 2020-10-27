@@ -6,10 +6,11 @@ import error_image from './error.png'
 
 type Props = {
   repoName: String
+  isRight?: Boolean
 }
 
 
-export function RepoCard({ repoName }: Props) {
+export function RepoCard({ repoName, isRight }: Props) {
   const [error, setError] = useState({ message: '' })
   const [isLoaded, setIsLoaded] = useState(false)
   const [data, setData] = useState({ content: '' })
@@ -53,14 +54,19 @@ export function RepoCard({ repoName }: Props) {
     let text = buff.toString('ascii')
 
     return (
-      <Flex align='row' rounded={20} overflow='hidden' bg={bgColor[colorMode]} >
+      <Flex
+        direction={isRight ? 'row-reverse' : 'row'}
+        {...isRight ? {ml:'10%'} : {mr:'10%'}}
+        rounded={20}
+        overflow='hidden'
+        bg={bgColor[colorMode]} >
         <Image width='md'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
-          mr={4} />
+        />
         <ErrorBoundary>
-          <MarkDownSnippet markDown={text} />
+          <MarkDownSnippet markDown={text} textAlign={isRight ? 'right' : 'left'} mx={4} />
         </ErrorBoundary>
       </Flex>
 

@@ -13,7 +13,7 @@ const Routes = () => {
   console.log(match.path)
   return (<>
   <Route component={Header} />
-  <Box m={4}>
+  <Box m={4} mx='10%' >
     <Switch>
       <Route exact key='route-home' path={`${match.path}`} component={Home} />
       <Route key='route-about' path={`${match.path}/about`} component={About} /> {/*  TODO: remove 404 bug on page reload */}
