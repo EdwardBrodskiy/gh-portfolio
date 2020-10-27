@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Spinner, Text, Image, Flex, useColorMode } from '@chakra-ui/core'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
+import error_image from './error.png'
 
 type Props = {
   repoName: String
@@ -55,6 +56,7 @@ export function RepoCard({ repoName }: Props) {
       <Flex align='row' rounded={20} overflow='hidden' bg={bgColor[colorMode]} >
         <Image width='md'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
+          fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
           mr={4} />
         <ErrorBoundary>
