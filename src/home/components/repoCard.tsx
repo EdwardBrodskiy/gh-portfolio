@@ -53,7 +53,10 @@ export function RepoCard({ repoName }: Props) {
 
     return (
       <Flex align='row' rounded={20} overflow='hidden' bg={bgColor[colorMode]} >
-        <Image width='md' src='https://github.com/EdwardBrodskiy/MandelBrotSet/raw/master/Sample%20images/set%20of%204.png' alt='test' mr={4}/>
+        <Image width='md'
+          src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
+          alt={`Preview for ${repoName}`}
+          mr={4} />
         <ErrorBoundary>
           <MarkDownSnippet markDown={text} />
         </ErrorBoundary>
