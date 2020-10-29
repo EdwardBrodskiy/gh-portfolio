@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Heading, List, ListItem, Spinner, Text } from '@chakra-ui/core'
 import { RepoCard } from './components/repoCard';
+import config from '../config.json'
 
 
 export function Home() {
@@ -37,13 +38,19 @@ export function Home() {
   } else if (!isLoaded) {
     return <Spinner />
   } else {
+    let repoList = config.priorityRepos
+    data.forEach(repo => {
+      if(!config.excludedRepos.includes(repo.name) && !repoList.includes(repo.name) && repo.name !== ''){
+        repoList.push(repo.name)
+      }
+    })
     return (
       <Box>
 
         <Heading as='h1' mb={4} >My Public Repos</Heading>
         
         <List spacing={8} ml={4}>
-          {data.map((repo, index) => <ListItem key={repo.name}><RepoCard repoName={repo.name} isRight={!!(index%2)} /></ListItem>)}
+          {repoList.map((repoName, index) => <ListItem key={repoName}><RepoCard repoName={repoName} isRight={!!(index%2)} /></ListItem>)}
         </List>
       </Box>
 
