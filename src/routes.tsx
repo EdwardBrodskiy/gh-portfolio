@@ -10,7 +10,6 @@ import { MatchParams } from './types'
 
 const Routes = () => {
   const match = useRouteMatch<MatchParams>()
-  console.log(match.path)
   return (<>
   <Route component={Header} />
   <Box m={4} mx='10%' >

@@ -41,7 +41,7 @@ export function RepoCard({ repoName, isRight }: Props) {
           setIsLoaded(true)
         }
       )
-  })
+  }, [repoName])
 
 
 
