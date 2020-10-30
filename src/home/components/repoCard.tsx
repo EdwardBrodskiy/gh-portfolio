@@ -60,7 +60,8 @@ export function RepoCard({ repoName, isRight }: Props) {
         rounded={20}
         overflow='hidden'
         bg={bgColor[colorMode]} >
-        <Image width='md'
+        <Image 
+          height='20rem'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}

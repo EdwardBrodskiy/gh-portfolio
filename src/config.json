@@ -1,11 +1,16 @@
 {
-  "priorityRepos" : [
-    "MandelBrotSet",
-    "digit_classifier",
-    "Snake-ai",
-    "single-file-projects"
-  ],
-  "excludedRepos" : [
-    "ECS529"
-  ]
+  "repositories" : {
+    "priorityRepos" : [
+      "MandelBrotSet",
+      "digit_classifier",
+      "Snake-ai",
+      "single-file-projects"
+    ],
+    "excludedRepos" : [
+      "ECS529"
+    ]
+  },
+  "intro" : {
+    
+  }
 }
