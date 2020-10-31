@@ -1,9 +1,10 @@
 import { Box } from '@chakra-ui/core'
 import React from 'react'
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
-import { About } from './about'
+import { AboutThisSite } from './aboutThisSite'
 import { Header } from './components/header'
 import { Home } from './home'
+import { AboutMe } from './aboutMe'
 import { MatchParams } from './types'
 
 
@@ -11,11 +12,12 @@ import { MatchParams } from './types'
 const Routes = () => {
   const match = useRouteMatch<MatchParams>()
   return (<>
-  <Route component={Header} />
+  <Header />
   <Box m={4} mx='10%' >
     <Switch>
       <Route exact key='route-home' path='/' component={Home} />
-      <Route exact key='route-about' path='/about' component={About} />
+      <Route exact key='route-about-this-site' path='/about-this-site' component={AboutThisSite} />
+      <Route exact key='route-about-me' path='/about-me' component={AboutMe} />
 
       <Redirect from='*' to='/' /> {/* TODO: add 404 page instead */}
     </Switch>
