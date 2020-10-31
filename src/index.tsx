@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
-import { Router, Route } from 'react-router-dom'
+import { HashRouter, Route } from 'react-router-dom'
 import './App.css'
 import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core"
 import Routes from './routes'
@@ -15,11 +15,9 @@ function App() {
     <ThemeProvider >
       <ColorModeProvider>
         <CSSReset />
-        <Router history={history}>
-          <Route key='root' path={`/gh-portfolio`} component={Routes} />
-
-          
-        </Router>
+        <HashRouter basename='/'>
+          <Routes />
+        </HashRouter>
       </ColorModeProvider>
     </ThemeProvider>
   )
