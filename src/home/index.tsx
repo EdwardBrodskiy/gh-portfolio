@@ -13,6 +13,6 @@ export function Home() {
       <RepoList />
     </Box>
 
-  );
+  )
 }
 

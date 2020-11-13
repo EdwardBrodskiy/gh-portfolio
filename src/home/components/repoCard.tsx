@@ -22,9 +22,9 @@ export function RepoCard({ repoName, isRight }: Props) {
     fetch(`https://api.github.com/repos/EdwardBrodskiy/${repoName}/contents/README.md`)
       .then(function (response) {
         if (!response.ok) {
-          throw Error(response.statusText);
+          throw Error(response.statusText)
         }
-        return response;
+        return response
       })
       .then(res => res.json())
       .then(

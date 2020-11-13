@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Heading, List, ListItem, Spinner, Text } from '@chakra-ui/core'
-import { RepoCard } from './repoCard';
+import { RepoCard } from './repoCard'
 import { repositories } from '../../config.json'
 
 
 export function RepoList() {
-  const [error, setError] = useState({ message: '' });
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [data, setData] = useState([{ name: '' }]);
+  const [error, setError] = useState({ message: '' })
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [data, setData] = useState([{ name: '' }])
 
   useEffect(() => {
     fetch("https://api.github.com/users/EdwardBrodskiy/repos")
       .then(function (response) {
         if (!response.ok) {
-          throw Error(response.statusText);
+          throw Error(response.statusText)
         }
-        return response;
+        return response
       })
       .then(res => res.json())
       .then(
         (result) => {
-          setIsLoaded(true);
-          setData(result);
+          setIsLoaded(true)
+          setData(result)
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
-          setError(error);
-          setIsLoaded(true);
+          setError(error)
+          setIsLoaded(true)
         }
       )
   }, [])
