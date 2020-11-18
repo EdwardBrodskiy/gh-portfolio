@@ -4,6 +4,7 @@ import { Link, useRouteMatch} from 'react-router-dom'
 import { DarkModeToggle } from '../DarkMode'
 import { NavItem } from './NavItem'
 import { MatchParams } from '../../types'
+import { aboutMe, aboutThisSite} from '../../config.json'
 
 export const Header = () => {
   const match = useRouteMatch<MatchParams>()
@@ -25,8 +26,8 @@ export const Header = () => {
         <Flex justify='space-between' align='center' w='100%' h='100%'>
           <Flex align='center' justify='space-evenly' maxWidth='480px' >
             <NavItem><Link to='/'>Home</Link></NavItem>
-            <NavItem><Link to='/about-this-site'>About this site</Link></NavItem>
-            <NavItem><Link to='/about-me'>About me</Link></NavItem>
+            {aboutThisSite.show && <NavItem><Link to='/about-this-site'>About this site</Link></NavItem>}
+            {aboutMe.show && <NavItem><Link to='/about-me'>About me</Link></NavItem>}
           </Flex>
           <DarkModeToggle />
         </Flex>

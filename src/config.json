@@ -1,15 +1,20 @@
 {
-  "repositories" : {
-    "priorityRepos" : [
+  "repositories": {
+    "priorityRepos": [
       "MandelBrotSet",
       "digit_classifier",
       "Snake-ai",
       "single-file-projects"
     ],
-    "excludedRepos" : [
+    "excludedRepos": [
       "ECS529"
     ]
   },
-  "intro" : {
+  "aboutMe": {
+    "show": false
+  },
+  "aboutThisSite": {
+    "show": true,
+    "text": "This website uses the github api to pull in all of my public repositories and displays them in a more presenteble bite size manor."
   }
 }
