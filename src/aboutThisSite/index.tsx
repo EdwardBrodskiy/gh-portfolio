@@ -1,10 +1,12 @@
 import React from 'react'
-import { Box, Text } from '@chakra-ui/core'
+import { Box, Heading, Text } from '@chakra-ui/core'
+import { aboutThisSite } from '../config.json'
 
 export function AboutThisSite() {
   return (
     <Box>
-      <Text>Nothing yet to say</Text>
+      <Heading>About this site</Heading>
+      <Text>{aboutThisSite.text}</Text>
     </Box>
   )
 }

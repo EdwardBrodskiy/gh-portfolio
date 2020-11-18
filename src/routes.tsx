@@ -6,6 +6,7 @@ import { Header } from './components/header'
 import { Home } from './home'
 import { AboutMe } from './aboutMe'
 import { MatchParams } from './types'
+import { aboutMe, aboutThisSite} from './config.json'
 
 
 
@@ -16,8 +17,8 @@ const Routes = () => {
   <Box m={4} mx='10%' >
     <Switch>
       <Route exact key='route-home' path='/' component={Home} />
-      <Route exact key='route-about-this-site' path='/about-this-site' component={AboutThisSite} />
-      <Route exact key='route-about-me' path='/about-me' component={AboutMe} />
+      {aboutThisSite.show && <Route exact key='route-about-this-site' path='/about-this-site' component={AboutThisSite} />}
+      {aboutMe.show && <Route exact key='route-about-me' path='/about-me' component={AboutMe} />}
 
       <Redirect from='*' to='/' /> {/* TODO: add 404 page instead */}
     </Switch>
