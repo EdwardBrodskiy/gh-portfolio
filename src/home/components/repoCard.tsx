@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Spinner, Text, Image, Flex, useColorMode } from '@chakra-ui/core'
+import { Spinner, Text, Image, Flex, useColorMode, Link, Box, Button } from '@chakra-ui/core'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
 import error_image from './error.png'
@@ -53,19 +53,29 @@ export function RepoCard({ repoName, isRight }: Props) {
     return (
       <Flex
         direction={isRight ? 'row-reverse' : 'row'}
-        {...isRight ? {ml:'10%'} : {mr:'10%'}}
+        {...isRight ? { ml: '10%' } : { mr: '10%' }}
         rounded={20}
         overflow='hidden'
         bg={bgColor[colorMode]} >
-        <Image 
+        <Image
           height='20rem'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
         />
-        <ErrorBoundary>
-          <MarkDownSnippet markDown={text} textAlign={isRight ? 'right' : 'left'} mx={4} />
-        </ErrorBoundary>
+        <Flex m={4} textAlign={isRight ? 'right' : 'left'} direction='column' justify='space-between'>
+          <ErrorBoundary>
+            <MarkDownSnippet markDown={text} />
+          </ErrorBoundary>
+          <Link
+            href={`https://github.com/EdwardBrodskiy/${repoName}`}
+            target='_blank'
+            textAlign={!isRight ? 'right' : 'left'} 
+          >
+            <Button >See Repository</Button>
+          </Link>
+        </Flex>
+
       </Flex>
 
     )
