@@ -63,7 +63,7 @@ export function RepoCard({ repoName, isRight }: Props) {
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
         />
-        <Flex m={4} textAlign={isRight ? 'right' : 'left'} direction='column' justify='space-between'>
+        <Flex m={4} textAlign={isRight ? 'right' : 'left'} direction='column' justify='space-between' w='100%'>
           <ErrorBoundary>
             <MarkDownSnippet markDown={text} />
           </ErrorBoundary>
