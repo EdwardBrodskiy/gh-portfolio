@@ -12,8 +12,9 @@ export const Header = () => {
   const { colorMode } = useColorMode()
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
   return (
-    <Box h='4rem'>
+    <Box h='4rem' >
       <Box
+        zIndex={1}
         p={4}
         h='4rem'
         bg={bgColor[colorMode]}
