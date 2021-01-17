@@ -52,25 +52,26 @@ export function RepoCard({ repoName, isRight }: Props) {
 
     return (
       <Flex
-        direction={isRight ? 'row-reverse' : 'row'}
-        {...isRight ? { ml: '10%' } : { mr: '10%' }}
+        direction={{lg: isRight ? 'row-reverse' : 'row', base: 'column'}}
+        {...isRight ? { ml: {lg:'10%', base:'0'} } : { mr: {lg:'10%', base:'0'} }}
         rounded={20}
         overflow='hidden'
         bg={bgColor[colorMode]} >
         <Image
-          height='20rem'
+          maxWidth={{lg:'40%', base:'100%'}}
+          objectFit='cover'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
         />
-        <Flex m={4} textAlign={isRight ? 'right' : 'left'} direction='column' justify='space-between' w='100%'>
+        <Flex p={4} textAlign={{lg: isRight ? 'right' : 'left'}} direction='column' justify='space-between' w='100%'>
           <ErrorBoundary>
             <MarkDownSnippet markDown={text} />
           </ErrorBoundary>
           <Link
             href={`https://github.com/EdwardBrodskiy/${repoName}`}
             target='_blank'
-            textAlign={!isRight ? 'right' : 'left'} 
+            textAlign={{lg: !isRight ? 'right' : 'left', base:'right'}}
           >
             <Button >See Repository</Button>
           </Link>

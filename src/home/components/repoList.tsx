@@ -45,7 +45,7 @@ export function RepoList() {
       }
     })
     return (
-      <List spacing={8} ml={4}>
+      <List spacing={8}>
         {repoList.map((repoName, index) => <ListItem key={repoName}><RepoCard repoName={repoName} isRight={!!(index % 2)} /></ListItem>)}
       </List>
     )
