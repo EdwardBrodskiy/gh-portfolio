@@ -1,14 +1,14 @@
 import React from 'react'
-import { Box, Text, Heading, Image, AspectRatioBox, Flex } from '@chakra-ui/core'
+import { Box, Text, Heading, Image } from '@chakra-ui/react'
 
 export function AboutMe() {
   return (
     <Box>
       <Heading >A Bit About Me</Heading>
       <Box>
-        <AspectRatioBox ratio={16 / 9} maxWidth='40em'>
+        
           <Image src='https://github.com/EdwardBrodskiy/MandelBrotSet/raw/master/sample-images/buddah%201080%20layered.png' />
-        </AspectRatioBox>
+        
 
         <Text>
           My name is Edvard Brodskiy I am currently studying Computer Science at Queen Mary University of London.

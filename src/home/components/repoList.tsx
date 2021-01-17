@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Heading, List, ListItem, Spinner, Text } from '@chakra-ui/core'
+import { List, ListItem, Spinner, Text } from '@chakra-ui/react'
 import { RepoCard } from './repoCard'
 import { repositories } from '../../config.json'
 

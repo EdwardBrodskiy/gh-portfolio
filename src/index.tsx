@@ -4,7 +4,7 @@ import './index.css'
 import * as serviceWorker from './serviceWorker'
 import { HashRouter, Route } from 'react-router-dom'
 import './App.css'
-import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core"
+import { ThemeProvider, ColorModeProvider, CSSReset, ChakraProvider } from "@chakra-ui/react"
 import Routes from './routes'
 import { createBrowserHistory } from "history"
 
@@ -12,14 +12,12 @@ const history = createBrowserHistory()
 
 function App() {
   return (
-    <ThemeProvider >
-      <ColorModeProvider>
-        <CSSReset />
-        <HashRouter basename='/'>
-          <Routes />
-        </HashRouter>
-      </ColorModeProvider>
-    </ThemeProvider>
+    <ChakraProvider>
+       <CSSReset />
+      <HashRouter basename='/'>
+        <Routes />
+      </HashRouter>
+    </ChakraProvider>
   )
 }
 

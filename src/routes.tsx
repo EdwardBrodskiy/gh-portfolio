@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
 import { AboutThisSite } from './aboutThisSite'
@@ -12,7 +12,7 @@ import { aboutMe, aboutThisSite} from './config.json'
 
 const Routes = () => {
   const match = useRouteMatch<MatchParams>()
-  return (<>
+  return (<Box bgGradient='linear(to-r, blue.200, grey.500)'>
   <Header />
   <Box m={4} mx='10%' >
     <Switch>
@@ -24,7 +24,7 @@ const Routes = () => {
     </Switch>
   </Box>
 
-</>)
+</Box>)
 }
 
 export default Routes

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, useColorMode } from '@chakra-ui/core'
+import { Box, Flex, useColorMode } from '@chakra-ui/react'
 import { Link, useRouteMatch} from 'react-router-dom'
 import { DarkModeToggle } from '../DarkMode'
 import { NavItem } from './NavItem'

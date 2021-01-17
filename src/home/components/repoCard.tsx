@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Spinner, Text, Image, Flex, useColorMode, Link, Box, Button } from '@chakra-ui/core'
+import { Spinner, Text, Image, Flex, useColorMode, Link, Button } from '@chakra-ui/react'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
 import error_image from './error.png'
