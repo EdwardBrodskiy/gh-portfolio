@@ -8,7 +8,8 @@
     ],
     "excludedRepos": [
       "ECS529",
-      "gh-test"
+      "gh-test",
+      "EdwardBrodskiy"
     ]
   },
   "aboutMe": {
