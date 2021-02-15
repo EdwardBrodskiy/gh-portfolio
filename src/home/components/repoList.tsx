@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { List, ListItem, Spinner, Text } from '@chakra-ui/react'
+import { List, ListItem, Text } from '@chakra-ui/react'
 import { RepoCard } from './repoCard'
 import { repositories } from '../../config.json'
+import { RepoCardSkeleton } from './repoCardSkeleton'
 
 
 export function RepoList() {
@@ -36,7 +37,9 @@ export function RepoList() {
   if (error.message !== '') {
     return <Text>Error: {error.message}</Text>
   } else if (!isLoaded) {
-    return <Spinner />
+    return <List spacing={{ base: 4, md: 8 }}>
+      {[0, 0, 0, 0, 0].map((_, index) => <ListItem key={index}><RepoCardSkeleton isRight={!!(index % 2)} /></ListItem>)}
+    </List>
   } else {
     let repoList = repositories.priorityRepos
     data.forEach(repo => {
@@ -45,7 +48,7 @@ export function RepoList() {
       }
     })
     return (
-      <List spacing={8}>
+      <List spacing={{ base: 4, md: 8 }}>
         {repoList.map((repoName, index) => <ListItem key={repoName}><RepoCard repoName={repoName} isRight={!!(index % 2)} /></ListItem>)}
       </List>
     )

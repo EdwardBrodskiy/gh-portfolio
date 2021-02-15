@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
-import { HashRouter, Route } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import './App.css'
-import { ThemeProvider, ColorModeProvider, CSSReset, ChakraProvider } from "@chakra-ui/react"
+import { CSSReset, ChakraProvider } from "@chakra-ui/react"
 import Routes from './routes'
 import { createBrowserHistory } from "history"
 
@@ -13,7 +13,7 @@ const history = createBrowserHistory()
 function App() {
   return (
     <ChakraProvider>
-       <CSSReset />
+      <CSSReset />
       <HashRouter basename='/'>
         <Routes />
       </HashRouter>

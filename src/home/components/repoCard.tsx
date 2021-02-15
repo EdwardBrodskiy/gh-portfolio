@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Spinner, Text, Image, Flex, useColorMode, Link, Button } from '@chakra-ui/react'
+import { Text, Image, Flex, useColorMode, Link, Button, Box, Skeleton } from '@chakra-ui/react'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
 import error_image from './error.png'
@@ -45,36 +45,43 @@ export function RepoCard({ repoName, isRight }: Props) {
   if (error.message !== '') {
     return <Text>Error: {error.message}</Text>
   } else if (!isLoaded) {
-    return <Spinner />
+    return <Skeleton
+      {...isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } }}
+      rounded={20}
+
+    />
   } else {
     let buff = Buffer.from(data.content, 'base64')
     let text = buff.toString('ascii')
 
     return (
       <Flex
-        direction={{lg: isRight ? 'row-reverse' : 'row', base: 'column'}}
-        {...isRight ? { ml: {lg:'10%', base:'0'} } : { mr: {lg:'10%', base:'0'} }}
+        direction={{ lg: isRight ? 'row-reverse' : 'row', base: 'column' }}
+        {...isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } }}
         rounded={20}
         overflow='hidden'
         bg={bgColor[colorMode]} >
         <Image
-          maxWidth={{lg:'40%', base:'100%'}}
+          maxWidth={{ lg: '40%', base: '100%' }}
           objectFit='cover'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
         />
-        <Flex p={4} textAlign={{lg: isRight ? 'right' : 'left'}} direction='column' justify='space-between' w='100%'>
+        <Flex p={4} textAlign={{ lg: isRight ? 'right' : 'left' }} direction='column' justify='space-between' w='100%'>
           <ErrorBoundary>
             <MarkDownSnippet markDown={text} />
           </ErrorBoundary>
-          <Link
-            href={`https://github.com/EdwardBrodskiy/${repoName}`}
-            target='_blank'
-            textAlign={{lg: !isRight ? 'right' : 'left', base:'right'}}
-          >
-            <Button >See Repository</Button>
-          </Link>
+          <Box textAlign={{ lg: !isRight ? 'right' : 'left', base: 'right' }}>
+            <Link
+              href={`https://github.com/EdwardBrodskiy/${repoName}`}
+              target='_blank'
+
+            >
+              <Button >See Repository</Button>
+            </Link>
+          </Box>
+
         </Flex>
 
       </Flex>
