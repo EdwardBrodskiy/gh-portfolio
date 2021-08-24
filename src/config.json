@@ -1,16 +1,7 @@
 {
   "repositories": {
-    "priorityRepos": [
-      "MandelBrotSet",
-      "digit_classifier",
-      "Snake-ai",
-      "single-file-projects"
-    ],
-    "excludedRepos": [
-      "ECS529",
-      "gh-test",
-      "EdwardBrodskiy"
-    ]
+    "priorityRepos": ["MandelBrotSet", "digit_classifier", "Snake-ai", "single-file-projects"],
+    "excludedRepos": ["ECS529", "gh-test", "EdwardBrodskiy"]
   },
   "aboutMe": {
     "show": false

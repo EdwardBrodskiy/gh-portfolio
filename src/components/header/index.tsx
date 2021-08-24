@@ -1,10 +1,10 @@
 import React from 'react'
 import { Box, Flex, useColorMode } from '@chakra-ui/react'
-import { Link, useRouteMatch} from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
 import { DarkModeToggle } from '../DarkMode'
 import { NavItem } from './NavItem'
 import { MatchParams } from '../../types'
-import { aboutMe, aboutThisSite} from '../../config.json'
+import { aboutMe, aboutThisSite } from '../../config.json'
 
 export const Header = () => {
   const match = useRouteMatch<MatchParams>()
@@ -12,7 +12,7 @@ export const Header = () => {
   const { colorMode } = useColorMode()
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
   return (
-    <Box h='4rem' >
+    <Box h='4rem'>
       <Box
         zIndex={1}
         p={4}
@@ -23,19 +23,27 @@ export const Header = () => {
         right='0'
         top='0'
         borderBottomWidth='1px'
-        width='full'>
+        width='full'
+      >
         <Flex justify='space-between' align='center' w='100%' h='100%'>
-          <Flex align='center' justify='space-evenly' maxWidth='480px' >
-            <NavItem><Link to='/'>Home</Link></NavItem>
-            {aboutThisSite.show && <NavItem><Link to='/about-this-site'>About this site</Link></NavItem>}
-            {aboutMe.show && <NavItem><Link to='/about-me'>About me</Link></NavItem>}
+          <Flex align='center' justify='space-evenly' maxWidth='480px'>
+            <NavItem>
+              <Link to='/'>Home</Link>
+            </NavItem>
+            {aboutThisSite.show && (
+              <NavItem>
+                <Link to='/about-this-site'>About this site</Link>
+              </NavItem>
+            )}
+            {aboutMe.show && (
+              <NavItem>
+                <Link to='/about-me'>About me</Link>
+              </NavItem>
+            )}
           </Flex>
           <DarkModeToggle />
         </Flex>
-
-      </Box >
+      </Box>
     </Box>
-
-
   )
 }

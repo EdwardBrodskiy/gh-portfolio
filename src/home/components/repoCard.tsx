@@ -9,7 +9,6 @@ type Props = {
   isRight?: Boolean
 }
 
-
 export function RepoCard({ repoName, isRight }: Props) {
   const [error, setError] = useState({ message: '' })
   const [isLoaded, setIsLoaded] = useState(false)
@@ -26,7 +25,7 @@ export function RepoCard({ repoName, isRight }: Props) {
         }
         return response
       })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
         (result) => {
           setData(result)
@@ -36,56 +35,56 @@ export function RepoCard({ repoName, isRight }: Props) {
           console.log('error caught')
           setError(error)
           setIsLoaded(true)
-        }
+        },
       )
   }, [repoName])
-
-
 
   if (error.message !== '') {
     return <Text>Error: {error.message}</Text>
   } else if (!isLoaded) {
-    return <Skeleton
-      {...isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } }}
-      rounded={20}
-
-    />
+    return (
+      <Skeleton
+        {...(isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } })}
+        rounded={20}
+      />
+    )
   } else {
     let buff = Buffer.from(data.content, 'base64')
     let text = buff.toString('ascii')
 
     return (
       <Flex
+        height={{ lg: '16em', base: '' }}
         direction={{ lg: isRight ? 'row-reverse' : 'row', base: 'column' }}
-        {...isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } }}
+        {...(isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } })}
         rounded={20}
         overflow='hidden'
-        bg={bgColor[colorMode]} >
+        bg={bgColor[colorMode]}
+      >
         <Image
-          maxWidth={{ lg: '40%', base: '100%' }}
+          width={{ lg: '80%', base: '100%' }}
           objectFit='cover'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
         />
-        <Flex p={4} textAlign={{ lg: isRight ? 'right' : 'left' }} direction='column' justify='space-between' w='100%'>
+        <Flex
+          p={4}
+          textAlign={{ lg: isRight ? 'right' : 'left' }}
+          direction='column'
+          justify='space-between'
+          w='100%'
+        >
           <ErrorBoundary>
             <MarkDownSnippet markDown={text} />
           </ErrorBoundary>
           <Box textAlign={{ lg: !isRight ? 'right' : 'left', base: 'right' }}>
-            <Link
-              href={`https://github.com/EdwardBrodskiy/${repoName}`}
-              target='_blank'
-
-            >
-              <Button >See Repository</Button>
+            <Link href={`https://github.com/EdwardBrodskiy/${repoName}`} target='_blank'>
+              <Button>See Repository</Button>
             </Link>
           </Box>
-
         </Flex>
-
       </Flex>
-
     )
   }
 }
