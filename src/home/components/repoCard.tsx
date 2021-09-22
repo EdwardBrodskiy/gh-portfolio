@@ -54,7 +54,7 @@ export function RepoCard({ repoName, isRight }: Props) {
 
     return (
       <Flex
-        height={{ lg: '16em', base: '' }}
+        height={{ lg: '18em', base: '' }}
         direction={{ lg: isRight ? 'row-reverse' : 'row', base: 'column' }}
         {...(isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } })}
         rounded={20}
@@ -62,7 +62,7 @@ export function RepoCard({ repoName, isRight }: Props) {
         bg={bgColor[colorMode]}
       >
         <Image
-          width={{ lg: '80%', base: '100%' }}
+          width={{ lg: '40%', base: '100%' }}
           objectFit='cover'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
           fallbackSrc={error_image}

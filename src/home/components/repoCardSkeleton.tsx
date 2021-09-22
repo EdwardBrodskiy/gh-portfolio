@@ -13,13 +13,13 @@ export function RepoCardSkeleton({ isRight }: Props) {
     // height='200px'
     // />
     <Flex
-      height={{ lg: '16em', base: '' }}
+      height={{ lg: '18em', base: '' }}
       direction={{ lg: isRight ? 'row-reverse' : 'row', base: 'column' }}
       {...(isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } })}
       rounded={20}
       overflow='hidden'
     >
-      <Skeleton width={{ lg: '80%', base: '100%' }} height='100%' />
+      <Skeleton width={{ lg: '40%', base: '100%' }} height='100%' />
       <Flex
         p={4}
         direction='column'
