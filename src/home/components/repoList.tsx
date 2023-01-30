@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { List, ListItem, Text } from '@chakra-ui/react'
 import { RepoCard } from './repoCard'
-import { repositories } from '../../config.json'
+import config from '../../config.json'
 import { RepoCardSkeleton } from './repoCardSkeleton'
 
 export function RepoList() {
@@ -43,10 +43,10 @@ export function RepoList() {
       </List>
     )
   } else {
-    let repoList = repositories.priorityRepos
+    let repoList = config.repositories.priorityRepos
     data.forEach((repo) => {
       if (
-        !repositories.excludedRepos.includes(repo.name) &&
+        !config.repositories.excludedRepos.includes(repo.name) &&
         !repoList.includes(repo.name) &&
         repo.name !== ''
       ) {

@@ -1,13 +1,11 @@
 import React from 'react'
 import { Box, Flex, useColorMode } from '@chakra-ui/react'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { DarkModeToggle } from '../DarkMode'
 import { NavItem } from './NavItem'
-import { MatchParams } from '../../types'
-import { aboutMe, aboutThisSite } from '../../config.json'
+import config from '../../config.json'
 
 export const Header = () => {
-  const match = useRouteMatch<MatchParams>()
 
   const { colorMode } = useColorMode()
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
@@ -30,12 +28,12 @@ export const Header = () => {
             <NavItem>
               <Link to='/'>Home</Link>
             </NavItem>
-            {aboutThisSite.show && (
+            {config.aboutThisSite.show && (
               <NavItem>
                 <Link to='/about-this-site'>About this site</Link>
               </NavItem>
             )}
-            {aboutMe.show && (
+            {config.aboutMe.show && (
               <NavItem>
                 <Link to='/about-me'>About me</Link>
               </NavItem>

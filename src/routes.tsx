@@ -1,37 +1,34 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
-import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
+import {Route, Routes, useLocation} from 'react-router-dom'
 import { AboutThisSite } from './aboutThisSite'
 import { Header } from './components/header'
 import { Home } from './home'
 import { AboutMe } from './aboutMe'
-import { MatchParams } from './types'
-import { aboutMe, aboutThisSite } from './config.json'
+import config from './config.json'
 
-const Routes = () => {
-  const match = useRouteMatch<MatchParams>()
+const SiteRoutes = () => {
+  const { pathname: match } = useLocation();
   return (
     <Box bgGradient='linear(to-r, blue.200, grey.500)'>
       <Header />
       <Box m={4} mx={{ base: '5%', md: '10%' }}>
-        <Switch>
-          <Route exact key='route-home' path='/' component={Home} />
-          {aboutThisSite.show && (
+        <Routes>
+          <Route key='route-home' path='/' element={<Home />} />
+          {config.aboutThisSite.show && (
             <Route
-              exact
               key='route-about-this-site'
               path='/about-this-site'
-              component={AboutThisSite}
+              element={<AboutThisSite />}
             />
           )}
-          {aboutMe.show && (
-            <Route exact key='route-about-me' path='/about-me' component={AboutMe} />
+          {config.aboutMe.show && (
+            <Route key='route-about-me' path='/about-me' element={<AboutMe />} />
           )}
-          <Redirect from='*' to='/' /> {/* TODO: add 404 page instead */}
-        </Switch>
+        </Routes>
       </Box>
     </Box>
   )
 }
 
-export default Routes
+export default SiteRoutes
