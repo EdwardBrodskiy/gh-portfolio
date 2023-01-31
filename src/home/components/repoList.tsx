@@ -3,6 +3,7 @@ import { List, ListItem, Text } from '@chakra-ui/react'
 import { RepoCard } from './repoCard'
 import config from '../../config.json'
 import { RepoCardSkeleton } from './repoCardSkeleton'
+import { ErrorBoundary } from '../../components/errorBoundary'
 
 export function RepoList() {
   const [error, setError] = useState({ message: '' })
@@ -57,7 +58,9 @@ export function RepoList() {
       <List spacing={{ base: 4, md: 8 }}>
         {repoList.map((repoName, index) => (
           <ListItem key={repoName}>
-            <RepoCard repoName={repoName} isRight={!!(index % 2)} />
+           <ErrorBoundary> {/* TODO: Add custom messages to error boundary */}
+              <RepoCard repoName={repoName} isRight={!!(index % 2)} />
+            </ErrorBoundary>
           </ListItem>
         ))}
       </List>

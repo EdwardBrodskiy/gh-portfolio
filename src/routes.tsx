@@ -8,7 +8,6 @@ import { AboutMe } from './aboutMe'
 import config from './config.json'
 
 const SiteRoutes = () => {
-  const { pathname: match } = useLocation();
   return (
     <Box bgGradient='linear(to-r, blue.200, grey.500)'>
       <Header />
