@@ -1,21 +1,14 @@
 {
   "files": {
-    "main.css": "/gh-portfolio/static/css/main.3991864e.chunk.css",
-    "main.js": "/gh-portfolio/static/js/main.e41679e9.chunk.js",
-    "main.js.map": "/gh-portfolio/static/js/main.e41679e9.chunk.js.map",
-    "runtime-main.js": "/gh-portfolio/static/js/runtime-main.edc182dc.js",
-    "runtime-main.js.map": "/gh-portfolio/static/js/runtime-main.edc182dc.js.map",
-    "static/js/2.9df720b7.chunk.js": "/gh-portfolio/static/js/2.9df720b7.chunk.js",
-    "static/js/2.9df720b7.chunk.js.map": "/gh-portfolio/static/js/2.9df720b7.chunk.js.map",
+    "main.css": "/gh-portfolio/static/css/main.073c9b0a.css",
+    "main.js": "/gh-portfolio/static/js/main.37078566.js",
+    "static/media/error.png": "/gh-portfolio/static/media/error.673ea9112a6c71eb2d69.png",
     "index.html": "/gh-portfolio/index.html",
-    "static/css/main.3991864e.chunk.css.map": "/gh-portfolio/static/css/main.3991864e.chunk.css.map",
-    "static/js/2.9df720b7.chunk.js.LICENSE.txt": "/gh-portfolio/static/js/2.9df720b7.chunk.js.LICENSE.txt",
-    "static/media/error.png": "/gh-portfolio/static/media/error.673ea911.png"
+    "main.073c9b0a.css.map": "/gh-portfolio/static/css/main.073c9b0a.css.map",
+    "main.37078566.js.map": "/gh-portfolio/static/js/main.37078566.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.edc182dc.js",
-    "static/js/2.9df720b7.chunk.js",
-    "static/css/main.3991864e.chunk.css",
-    "static/js/main.e41679e9.chunk.js"
+    "static/css/main.073c9b0a.css",
+    "static/js/main.37078566.js"
   ]
 }
