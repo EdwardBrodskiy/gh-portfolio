@@ -3,6 +3,7 @@ import { Text, Image, Flex, useColorMode, Link, Button, Box, Skeleton } from '@c
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
 import error_image from './error.png'
+import { Buffer } from 'buffer'
 
 type Props = {
   repoName: String
