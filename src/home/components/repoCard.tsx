@@ -16,7 +16,9 @@ export function RepoCard({ repoName, isRight }: Props) {
   const [error, setError] = useState({ message: '' })
   const [isLoaded, setIsLoaded] = useState(false)
   const [data, setData] = useState({ content: '' })
+
   const { ref, inView } = useInView()
+  const slideInAnimation = isRight ? styles.animateTileR : styles.animateTileL
 
   const { colorMode } = useColorMode()
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
@@ -65,7 +67,7 @@ export function RepoCard({ repoName, isRight }: Props) {
         overflow='hidden'
         bg={bgColor[colorMode]}
         ref={ref}
-        className={inView ? styles.animateTile : ''}
+        className={inView ? slideInAnimation : ''}
       >
         <Image
           width={{ lg: '40%', base: '100%' }}
