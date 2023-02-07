@@ -4,6 +4,8 @@ import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
 import error_image from './error.png'
 import { Buffer } from 'buffer'
+import { useInView } from 'react-intersection-observer'
+import styles from './repoCard.module.css'
 
 type Props = {
   repoName: String
@@ -14,6 +16,7 @@ export function RepoCard({ repoName, isRight }: Props) {
   const [error, setError] = useState({ message: '' })
   const [isLoaded, setIsLoaded] = useState(false)
   const [data, setData] = useState({ content: '' })
+  const { ref, inView } = useInView()
 
   const { colorMode } = useColorMode()
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
@@ -61,6 +64,8 @@ export function RepoCard({ repoName, isRight }: Props) {
         rounded={20}
         overflow='hidden'
         bg={bgColor[colorMode]}
+        ref={ref}
+        className={inView ? styles.animateTile : ''}
       >
         <Image
           width={{ lg: '40%', base: '100%' }}
