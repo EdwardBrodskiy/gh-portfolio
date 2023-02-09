@@ -1,15 +1,6 @@
 .animateTileL {
-    animation-duration: 1s;
-    animation-name: animate-tile-l;
-  }
-  
-@keyframes animate-tile-l {
-  0% {
-    opacity:0;
-    transform: translateX(-20vw);
-  }
-  100% {
-  }
+  animation-duration: 1s;
+  animation-name: animate-tile-l;
 }
 
 .animateTileR {
@@ -17,11 +8,28 @@
   animation-name: animate-tile-r;
 }
 
+@keyframes animate-tile-l {
+  0% {
+    opacity: 0;
+    transform: translateX(-20vw);
+  }
+}
 @keyframes animate-tile-r {
   0% {
-    opacity:0;
-    transform: translateX(20vw)
+    opacity: 0;
+    transform: translateX(20vw);
   }
-  100% {
+}
+
+@media (not (min-width: 62em)) or (prefers-reduced-motion) {
+  @keyframes animate-tile-l {
+    0% {
+      opacity: 0;
+    }
+  }
+  @keyframes animate-tile-r {
+    0% {
+      opacity: 0;
+    }
   }
 }

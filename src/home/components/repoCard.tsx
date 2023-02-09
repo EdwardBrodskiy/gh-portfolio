@@ -17,7 +17,7 @@ export function RepoCard({ repoName, isRight }: Props) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [data, setData] = useState({ content: '' })
 
-  const { ref, inView } = useInView()
+  const { ref, inView } = useInView({ triggerOnce: true })
   const slideInAnimation = isRight ? styles.animateTileR : styles.animateTileL
 
   const { colorMode } = useColorMode()
