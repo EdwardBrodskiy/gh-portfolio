@@ -6,9 +6,11 @@ import error_image from './error.png'
 import { Buffer } from 'buffer'
 import { useInView } from 'react-intersection-observer'
 import styles from './repoCard.module.css'
+import store from 'store'
+import { RepoCardContent } from '../../types'
 
 type Props = {
-  repoName: String
+  repoName: string
   isRight?: Boolean
 }
 
@@ -24,25 +26,39 @@ export function RepoCard({ repoName, isRight }: Props) {
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
 
   useEffect(() => {
-    fetch(`https://api.github.com/repos/EdwardBrodskiy/${repoName}/contents/README.md`)
-      .then(function (response) {
-        if (!response.ok) {
-          throw Error(response.statusText)
-        }
-        return response
-      })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setData(result)
-          setIsLoaded(true)
-        },
-        (error) => {
-          console.log('error caught')
-          setError(error)
-          setIsLoaded(true)
-        },
-      )
+    const repoCardContent: RepoCardContent = store.get(`repoCardContent-${repoName}`)
+    if (
+      repoCardContent === undefined ||
+      new Date().getTime() - repoCardContent.accessTime > 30 * 60 * 1000
+    ) {
+      fetch(`https://api.github.com/repos/EdwardBrodskiy/${repoName}/contents/README.md`)
+        .then(function (response) {
+          if (!response.ok) {
+            throw Error(response.statusText)
+          }
+          return response
+        })
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setData(result)
+            store.set(`repoCardContent-${repoName}`, {
+              accessTime: new Date().getTime(),
+              data: result,
+            })
+            setIsLoaded(true)
+          },
+          (error) => {
+            console.log('error caught')
+            setError(error)
+            setIsLoaded(true)
+          },
+        )
+    } else {
+      console.log(`Used Local Storage for ${repoName}`)
+      setData(repoCardContent.data)
+      setIsLoaded(true)
+    }
   }, [repoName])
 
   if (error.message !== '') {

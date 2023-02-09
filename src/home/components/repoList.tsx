@@ -4,6 +4,8 @@ import { RepoCard } from './repoCard'
 import config from '../../config.json'
 import { RepoCardSkeleton } from './repoCardSkeleton'
 import { ErrorBoundary } from '../../components/errorBoundary'
+import store from 'store'
+import { RepoListNames } from '../../types'
 
 export function RepoList() {
   const [error, setError] = useState({ message: '' })
@@ -11,24 +13,35 @@ export function RepoList() {
   const [data, setData] = useState([{ name: '' }])
 
   useEffect(() => {
-    fetch('https://api.github.com/users/EdwardBrodskiy/repos')
-      .then(function (response) {
-        if (!response.ok) {
-          throw Error(response.statusText)
-        }
-        return response
-      })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true)
-          setData(result)
-        },
-        (error) => {
-          setError(error)
-          setIsLoaded(true)
-        },
-      )
+    const repoList: RepoListNames = store.get('repoList')
+    if (repoList === undefined || new Date().getTime() - repoList.accessTime > 30 * 60 * 1000)
+      fetch('https://api.github.com/users/EdwardBrodskiy/repos')
+        .then(function (response) {
+          if (!response.ok) {
+            throw Error(response.statusText)
+          }
+          return response
+        })
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            store.set('repoList', {
+              accessTime: new Date().getTime(),
+              names: result,
+            } as RepoListNames)
+            setIsLoaded(true)
+            setData(result)
+          },
+          (error) => {
+            setError(error)
+            setIsLoaded(true)
+          },
+        )
+    else {
+      console.log(`Used Local Storage for repository Names`)
+      setData(repoList.names)
+      setIsLoaded(true)
+    }
   }, [])
 
   if (error.message !== '') {
@@ -58,7 +71,9 @@ export function RepoList() {
       <List spacing={{ base: 4, md: 8 }}>
         {repoList.map((repoName, index) => (
           <ListItem key={repoName}>
-           <ErrorBoundary> {/* TODO: Add custom messages to error boundary */}
+            <ErrorBoundary>
+              {' '}
+              {/* TODO: Add custom messages to error boundary */}
               <RepoCard repoName={repoName} isRight={!!(index % 2)} />
             </ErrorBoundary>
           </ListItem>
