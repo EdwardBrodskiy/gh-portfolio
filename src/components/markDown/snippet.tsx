@@ -27,38 +27,51 @@ export function MarkDownSnippets({ markDown, ...rest }: Props & BoxProps) {
 export function MarkDownSnippet({ markDown, ...rest }: Props & BoxProps) {
   const processor = unified().use(markdown)
 
-  const syntaxTree = processor.parse(markDown as string)
+  const syntaxTree: any = processor.parse(markDown as string)
 
-  const elements = syntaxTree.children.map((mditem, index) => {
+  let elements = []
+  let foundHeading = false
+  console.log(syntaxTree)
+  for (let index = 0; index < syntaxTree.children.length; index++) {
+    let mditem = syntaxTree.children[index]
+
     if ('children' in mditem && mditem.children.length > 0) {
       const content = mditem.children[0] as { value: string }
       const text = content.value || ''
       if (mditem.type == 'heading') {
+        if (foundHeading) {
+          break
+        }
+        foundHeading = true
         const level = mditem.depth || 1
-        return <RenderHeading key={index} text={text} level={level} />
-      } else if (mditem.type == 'paragraph') {
-        return <RenderParagraph key={index} text={text} />
-      } else {
-        return <RenderParagraph key={index} text={text} />
+        console.log(text)
+        elements.push(<RenderHeading key={index} text={text} level={level} />)
+      } else if (foundHeading) {
+        if (mditem.type == 'paragraph') {
+          elements.push(<RenderParagraph key={index} text={text} />)
+        } else {
+          elements.push(<RenderParagraph key={index} text={text} />)
+        }
       }
     } else {
-      if ('value' in mditem) {
+      if (foundHeading && 'value' in mditem) {
         const text = mditem.value
-        return <RenderParagraph key={index} text={text} />
+        elements.push(<RenderParagraph key={index} text={text} />)
       }
     }
-  })
+  }
   return <Box>{elements}</Box>
 }
+
 type RenderHeadingProps = {
   text: string
   level: number
 }
 
 function RenderHeading({ text, level, ...rest }: RenderHeadingProps & HeadingProps) {
-  const sizes = ['lg', 'md', 'md', 'md', 'md', 'sm', 'sm', 'sm']
+  const sizes = ['xl', 'lg', 'md', 'md', 'sm', 'sm']
   return (
-    <Heading as={`h${level}` as As} size={sizes[level]} paddingBottom='3' {...rest}>
+    <Heading as={`h${level}` as As} size={sizes[level - 1]} paddingBottom='3' {...rest}>
       {text}
     </Heading>
   )
