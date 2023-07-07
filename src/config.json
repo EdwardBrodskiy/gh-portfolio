@@ -4,7 +4,7 @@
     "excludedRepos": ["ECS529", "gh-test", "EdwardBrodskiy"]
   },
   "aboutMe": {
-    "show": false
+    "show": true
   },
   "aboutThisSite": {
     "show": true,

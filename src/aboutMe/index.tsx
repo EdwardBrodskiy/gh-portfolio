@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Text, Heading, Image } from '@chakra-ui/react'
+import { MarkDownSnippet } from '../components/markDown/snippet'
 
 export function AboutMe() {
+  const [markdownContent, setMarkdownContent] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetch(process.env.PUBLIC_URL + '/demo.md')
+      .then((response) => response.text())
+      .then((data) => {
+        setMarkdownContent(data)
+      })
+      .catch((error) => console.error('Error fetching markdown:', error))
+  }, []) // Empty array means this effect runs once on mount and not on subsequent re-renders
+
+  // If markdown content is null (i.e., still loading), display a loading message or spinner
+  if (markdownContent === null) {
+    return <Box>Loading...</Box>
+  }
   return (
     <Box>
       <Heading>A Bit About Me</Heading>
+      <Box>
+        <MarkDownSnippet markDown={markdownContent} />
+      </Box>
       <Box>
         <Image src='https://github.com/EdwardBrodskiy/MandelBrotSet/raw/master/sample-images/buddah%201080%20layered.png' />
 
