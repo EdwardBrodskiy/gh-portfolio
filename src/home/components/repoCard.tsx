@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Text, Image, Flex, useColorMode, Link, Button, Box, Skeleton } from '@chakra-ui/react'
+import {
+  Text,
+  Image,
+  Flex,
+  useColorMode,
+  Link,
+  Button,
+  Box,
+  Skeleton,
+  BoxProps,
+  useTheme,
+} from '@chakra-ui/react'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
 import error_image from './error.png'
@@ -74,6 +85,8 @@ export function RepoCard({ repoName, isRight }: Props) {
     let buff = Buffer.from(data.content, 'base64')
     let text = buff.toString('ascii')
 
+    const posSeeRepo = isRight ? { left: 0 } : { right: 0 }
+
     return (
       <Flex
         height={{ lg: '18em', base: '' }}
@@ -100,15 +113,48 @@ export function RepoCard({ repoName, isRight }: Props) {
           w='100%'
         >
           <ErrorBoundary>
-            <MarkDownSnippet markDown={text} />
+            <FadeOutText background={bgColor[colorMode]}>
+              <MarkDownSnippet markDown={text} />
+            </FadeOutText>
           </ErrorBoundary>
-          <Box textAlign={{ lg: !isRight ? 'right' : 'left', base: 'right' }}>
-            <Link href={`https://github.com/EdwardBrodskiy/${repoName}`} target='_blank'>
-              <Button>See Repository</Button>
-            </Link>
+          <Box position='absolute' width='100%'>
+            <Box position='relative'>
+              <Link href={`https://github.com/EdwardBrodskiy/${repoName}`} target='_blank'>
+                <Button>See Repository</Button>
+              </Link>
+            </Box>
           </Box>
         </Flex>
       </Flex>
     )
   }
+}
+
+function FadeOutText({ children, background }: BoxProps) {
+  const theme = useTheme()
+  let color = '#000'
+  if (background != undefined) {
+    const chakra_code = (background as string).split('.')
+    if (chakra_code.length == 2) {
+      if (chakra_code[0] in theme.colors && chakra_code[1] in theme.colors[chakra_code[0]]) {
+        color = theme.colors[chakra_code[0]][chakra_code[1]]
+      }
+    }
+  }
+
+  console.log(color)
+  return (
+    <Box position='relative' overflow='hidden' height='100%'>
+      {children}
+      <Box
+        position='absolute'
+        bottom='0'
+        right='0'
+        width='100%'
+        height='50%'
+        background={`linear-gradient(to top, ${color}, transparent)`}
+        pointerEvents='none'
+      />
+    </Box>
+  )
 }
