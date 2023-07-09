@@ -9,7 +9,7 @@ import {
   Box,
   Skeleton,
   BoxProps,
-  useTheme,
+  useMediaQuery,
 } from '@chakra-ui/react'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
@@ -35,6 +35,8 @@ export function RepoCard({ repoName, isRight }: Props) {
 
   const { colorMode } = useColorMode()
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
+
+  const [isLargerThan992] = useMediaQuery('(min-width: 992px)') // 992 is lg
 
   useEffect(() => {
     const repoCardContent: RepoCardContent = store.get(`repoCardContent-${repoName}`)
@@ -85,7 +87,7 @@ export function RepoCard({ repoName, isRight }: Props) {
     let buff = Buffer.from(data.content, 'base64')
     let text = buff.toString('ascii')
 
-    const posSeeRepo = isRight ? { left: 0 } : { right: 0 }
+    const posSeeRepo = isRight && isLargerThan992 ? { left: 4 } : { right: 4 }
 
     return (
       <Flex
@@ -111,18 +113,18 @@ export function RepoCard({ repoName, isRight }: Props) {
           direction='column'
           justify='space-between'
           w='100%'
+          position='relative'
         >
           <ErrorBoundary>
             <FadeOutText background={bgColor[colorMode]}>
               <MarkDownSnippet markDown={text} />
             </FadeOutText>
           </ErrorBoundary>
-          <Box position='absolute' width='100%'>
-            <Box position='relative'>
-              <Link href={`https://github.com/EdwardBrodskiy/${repoName}`} target='_blank'>
-                <Button>See Repository</Button>
-              </Link>
-            </Box>
+
+          <Box position='absolute' {...posSeeRepo}>
+            <Link href={`https://github.com/EdwardBrodskiy/${repoName}`} target='_blank'>
+              <Button>See Repository</Button>
+            </Link>
           </Box>
         </Flex>
       </Flex>
@@ -131,18 +133,6 @@ export function RepoCard({ repoName, isRight }: Props) {
 }
 
 function FadeOutText({ children, background }: BoxProps) {
-  const theme = useTheme()
-  let color = '#000'
-  if (background != undefined) {
-    const chakra_code = (background as string).split('.')
-    if (chakra_code.length == 2) {
-      if (chakra_code[0] in theme.colors && chakra_code[1] in theme.colors[chakra_code[0]]) {
-        color = theme.colors[chakra_code[0]][chakra_code[1]]
-      }
-    }
-  }
-
-  console.log(color)
   return (
     <Box position='relative' overflow='hidden' height='100%'>
       {children}
@@ -152,7 +142,7 @@ function FadeOutText({ children, background }: BoxProps) {
         right='0'
         width='100%'
         height='50%'
-        background={`linear-gradient(to top, ${color}, transparent)`}
+        bgGradient={`linear-gradient(to-t, ${background}, transparent)`}
         pointerEvents='none'
       />
     </Box>
