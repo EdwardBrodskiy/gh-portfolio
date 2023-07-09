@@ -19,6 +19,7 @@ import { useInView } from 'react-intersection-observer'
 import styles from './repoCard.module.css'
 import store from 'store'
 import { RepoCardContent } from '../../types'
+import { FaGithub } from 'react-icons/fa'
 
 type Props = {
   repoName: string
@@ -87,7 +88,7 @@ export function RepoCard({ repoName, isRight }: Props) {
     let buff = Buffer.from(data.content, 'base64')
     let text = buff.toString('ascii')
 
-    const posSeeRepo = isRight && isLargerThan992 ? { left: 4 } : { right: 4 }
+    const posSeeRepo = isRight && isLargerThan992 ? { right: 4 } : { left: 4 }
 
     return (
       <Flex
@@ -98,7 +99,8 @@ export function RepoCard({ repoName, isRight }: Props) {
         overflow='hidden'
         bg={bgColor[colorMode]}
         ref={ref}
-        className={inView ? slideInAnimation : ''}
+        className={inView ? `${slideInAnimation} ${styles.card}` : styles.card}
+        position='relative'
       >
         <Image
           width={{ lg: '40%', base: '100%' }}
@@ -113,20 +115,30 @@ export function RepoCard({ repoName, isRight }: Props) {
           direction='column'
           justify='space-between'
           w='100%'
-          position='relative'
         >
           <ErrorBoundary>
             <FadeOutText background={bgColor[colorMode]}>
               <MarkDownSnippet markDown={text} />
             </FadeOutText>
           </ErrorBoundary>
-
-          <Box position='absolute' {...posSeeRepo}>
-            <Link href={`https://github.com/EdwardBrodskiy/${repoName}`} target='_blank'>
-              <Button>See Repository</Button>
-            </Link>
-          </Box>
         </Flex>
+        <Box position='absolute' top='4' {...posSeeRepo}>
+          <Link
+            href={`https://github.com/EdwardBrodskiy/${repoName}`}
+            target='_blank'
+            className={styles.button}
+          >
+            <Button
+              variant='solid'
+              colorScheme='teal'
+              // background={bgColor[colorMode]}
+              opacity='80%'
+              leftIcon={<FaGithub />}
+            >
+              See Repository
+            </Button>
+          </Link>
+        </Box>
       </Flex>
     )
   }

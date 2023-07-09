@@ -1,3 +1,4 @@
+/* Slide in animation */
 .animateTileL {
   animation-duration: 1s;
   animation-name: animate-tile-l;
@@ -31,5 +32,16 @@
     0% {
       opacity: 0;
     }
+  }
+}
+
+/* Show buttons on Hover */
+@media screen and (min-width: 62em) {
+  .button {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .card:hover .button {
+    opacity: 1;
   }
 }
