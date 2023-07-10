@@ -34,9 +34,6 @@ export function RepoCard({ repoName, isRight }: Props) {
   const { ref, inView } = useInView({ triggerOnce: true })
   const slideInAnimation = isRight ? styles.animateTileR : styles.animateTileL
 
-  const { colorMode } = useColorMode()
-  const bgColor = { light: 'gray.200', dark: 'gray.700' }
-
   const [isLargerThan992] = useMediaQuery('(min-width: 992px)') // 992 is lg
 
   useEffect(() => {
@@ -96,7 +93,7 @@ export function RepoCard({ repoName, isRight }: Props) {
         {...(isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } })}
         rounded={20}
         overflow='hidden'
-        bg={bgColor[colorMode]}
+        bg='background1'
         ref={ref}
         className={inView ? `${slideInAnimation} ${styles.card}` : styles.card}
         position='relative'
@@ -124,7 +121,7 @@ export function RepoCard({ repoName, isRight }: Props) {
           >
             <ErrorBoundary>
               {isLargerThan992 ? (
-                <FadeOutText background={bgColor[colorMode]}>
+                <FadeOutText background='background1'>
                   <MarkDownSnippet markDown={text} />
                 </FadeOutText>
               ) : (

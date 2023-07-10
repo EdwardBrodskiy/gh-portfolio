@@ -1,47 +1,30 @@
 import React from 'react'
-import { Box, Flex, useColorMode } from '@chakra-ui/react'
+import { Box, Flex, useMediaQuery } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { DarkModeToggle } from '../DarkMode'
 import { NavItem } from './NavItem'
 import config from '../../config.json'
+import { PageMenu } from './pageMenu'
 
 export const Header = () => {
+  const [isLargerThan992] = useMediaQuery('(min-width: 992px)') // 992 is lg
 
-  const { colorMode } = useColorMode()
-  const bgColor = { light: 'gray.200', dark: 'gray.700' }
   return (
-    <Box h='4rem'>
-      <Box
-        zIndex={1}
-        p={4}
-        h='4rem'
-        bg={bgColor[colorMode]}
-        pos={'fixed'}
-        left='0'
-        right='0'
-        top='0'
-        borderBottomWidth='1px'
-        width='full'
-      >
-        <Flex justify='space-between' align='center' w='100%' h='100%'>
-          <Flex align='center' justify='space-evenly' maxWidth='480px'>
-            <NavItem>
-              <Link to='/'>Home</Link>
-            </NavItem>
-            {config.aboutThisSite.show && (
-              <NavItem>
-                <Link to='/about-this-site'>About this site</Link>
-              </NavItem>
-            )}
-            {config.aboutMe.show && (
-              <NavItem>
-                <Link to='/about-me'>About me</Link>
-              </NavItem>
-            )}
-          </Flex>
-          <DarkModeToggle />
+    <Box
+      zIndex={1}
+      p={4}
+      h='6rem'
+      bgGradient={`linear(to-b, background1, background2)`}
+      width='full'
+    >
+      <Flex justify='space-between' align='center' w='100%' h='100%'>
+        <Flex align='center' justify='space-evenly'>
+          <NavItem to='/' fontSize='3xl' as='i' color='primary'>
+            Edward Brodski's Portfolio
+          </NavItem>
         </Flex>
-      </Box>
+        <PageMenu />
+      </Flex>
     </Box>
   )
 }

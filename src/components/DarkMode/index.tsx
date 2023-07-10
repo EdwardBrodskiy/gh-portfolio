@@ -10,6 +10,7 @@ export function DarkModeToggle() {
       onClick={toggleColorMode}
       icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
       isRound={true}
+      margin='auto'
     />
   )
 }

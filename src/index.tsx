@@ -7,6 +7,7 @@ import './App.css'
 import { CSSReset, ChakraProvider } from '@chakra-ui/react'
 import SiteRoutes from './routes'
 import { createBrowserHistory } from 'history'
+import { customTheme } from './theme'
 
 const history = createBrowserHistory()
 
@@ -15,7 +16,7 @@ const root = createRoot(container!)
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <CSSReset />
       <HashRouter basename='/'>
         <SiteRoutes />
