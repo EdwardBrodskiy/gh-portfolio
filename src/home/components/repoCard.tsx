@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef, useState } from 'react'
+import React, { RefObject, useEffect, useState } from 'react'
 import {
   Text,
   Image,
@@ -10,7 +10,6 @@ import {
   Skeleton,
   BoxProps,
   useMediaQuery,
-  IconButton,
 } from '@chakra-ui/react'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
@@ -21,8 +20,6 @@ import styles from './repoCard.module.css'
 import store from 'store'
 import { RepoCardContent } from '../../types'
 import { FaGithub } from 'react-icons/fa'
-import { ChevronDownIcon } from '@chakra-ui/icons'
-import detectElementOverflow from 'detect-element-overflow'
 
 type Props = {
   repoName: string
@@ -41,16 +38,6 @@ export function RepoCard({ repoName, isRight }: Props) {
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
 
   const [isLargerThan992] = useMediaQuery('(min-width: 992px)') // 992 is lg
-
-  const child = useRef<HTMLElement>(null)
-  const parent = useRef<HTMLElement>(null)
-  const [isTextOverflowing, setIsTextOverflowing] = useState(false)
-
-  useEffect(() => {
-    if (child.current && parent.current) {
-      setIsTextOverflowing(detectElementOverflow(child.current, parent.current).overflowBottom > 0)
-    }
-  }, [])
 
   useEffect(() => {
     const repoCardContent: RepoCardContent = store.get(`repoCardContent-${repoName}`)
@@ -93,6 +80,7 @@ export function RepoCard({ repoName, isRight }: Props) {
   } else if (!isLoaded) {
     return (
       <Skeleton
+        height={{ lg: '24em', base: '30em' }}
         {...(isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } })}
         rounded={20}
       />
@@ -103,7 +91,7 @@ export function RepoCard({ repoName, isRight }: Props) {
 
     return (
       <Flex
-        height={{ lg: '18em', base: '' }}
+        height={{ lg: '24em', base: '' }}
         direction={{ lg: isRight ? 'row-reverse' : 'row', base: 'column' }}
         {...(isRight ? { ml: { lg: '10%', base: '0' } } : { mr: { lg: '10%', base: '0' } })}
         rounded={20}
@@ -114,7 +102,7 @@ export function RepoCard({ repoName, isRight }: Props) {
         position='relative'
       >
         <Image
-          width={{ lg: '40%', base: '100%' }}
+          width={{ lg: '50%', base: '100%' }}
           objectFit='cover'
           src={`https://github.com/EdwardBrodskiy/${repoName}/raw/master/sample-images/preview.jpg`}
           fallbackSrc={error_image}
@@ -127,19 +115,16 @@ export function RepoCard({ repoName, isRight }: Props) {
           direction={{ lg: 'inherit', base: 'column' }}
         >
           <Flex
-            p={4}
+            p={{ lg: 8, base: 4 }}
             textAlign={{ lg: isRight ? 'right' : 'left', base: 'left' }}
             direction='column'
             justify='space-between'
             w='100%'
-            ref={parent as RefObject<HTMLDivElement>}
+            fontSize={{ lg: 'xl', base: 'lg' }}
           >
             <ErrorBoundary>
               {isLargerThan992 ? (
-                <FadeOutText
-                  background={bgColor[colorMode]}
-                  ref={child as RefObject<HTMLDivElement>}
-                >
+                <FadeOutText background={bgColor[colorMode]}>
                   <MarkDownSnippet markDown={text} />
                 </FadeOutText>
               ) : (
