@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { RefObject, useEffect, useRef, useState } from 'react'
 import {
   Text,
   Image,
@@ -10,6 +10,7 @@ import {
   Skeleton,
   BoxProps,
   useMediaQuery,
+  IconButton,
 } from '@chakra-ui/react'
 import { MarkDownSnippet } from '../../components/markDown/snippet'
 import { ErrorBoundary } from '../../components/errorBoundary'
@@ -20,6 +21,8 @@ import styles from './repoCard.module.css'
 import store from 'store'
 import { RepoCardContent } from '../../types'
 import { FaGithub } from 'react-icons/fa'
+import { ChevronDownIcon } from '@chakra-ui/icons'
+import detectElementOverflow from 'detect-element-overflow'
 
 type Props = {
   repoName: string
@@ -38,6 +41,16 @@ export function RepoCard({ repoName, isRight }: Props) {
   const bgColor = { light: 'gray.200', dark: 'gray.700' }
 
   const [isLargerThan992] = useMediaQuery('(min-width: 992px)') // 992 is lg
+
+  const child = useRef<HTMLElement>(null)
+  const parent = useRef<HTMLElement>(null)
+  const [isTextOverflowing, setIsTextOverflowing] = useState(false)
+
+  useEffect(() => {
+    if (child.current && parent.current) {
+      setIsTextOverflowing(detectElementOverflow(child.current, parent.current).overflowBottom > 0)
+    }
+  }, [])
 
   useEffect(() => {
     const repoCardContent: RepoCardContent = store.get(`repoCardContent-${repoName}`)
@@ -109,32 +122,42 @@ export function RepoCard({ repoName, isRight }: Props) {
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
         />
-        <Flex
-          p={4}
-          textAlign={{ lg: isRight ? 'right' : 'left' }}
-          direction='column'
-          justify='space-between'
-          w='100%'
-        >
-          <ErrorBoundary>
-            <FadeOutText background={bgColor[colorMode]}>
-              <MarkDownSnippet markDown={text} />
-            </FadeOutText>
-          </ErrorBoundary>
+        <Flex w='100%' justify='center'>
+          <Flex
+            p={4}
+            textAlign={{ lg: isRight ? 'right' : 'left' }}
+            direction='column'
+            justify='space-between'
+            w='100%'
+            ref={parent as RefObject<HTMLDivElement>}
+          >
+            <ErrorBoundary>
+              {isLargerThan992 ? (
+                <FadeOutText
+                  background={bgColor[colorMode]}
+                  ref={child as RefObject<HTMLDivElement>}
+                >
+                  <MarkDownSnippet markDown={text} />
+                </FadeOutText>
+              ) : (
+                <MarkDownSnippet markDown={text} />
+              )}
+            </ErrorBoundary>
+          </Flex>
+          {isLargerThan992 && isTextOverflowing && (
+            <Box position='absolute' bottom='4' className={styles.button}>
+              <IconButton aria-label='Show all' icon={<ChevronDownIcon />} opacity='80%' isRound />
+            </Box>
+          )}
         </Flex>
+
         <Box position='absolute' top='4' {...posSeeRepo}>
           <Link
             href={`https://github.com/EdwardBrodskiy/${repoName}`}
             target='_blank'
             className={styles.button}
           >
-            <Button
-              variant='solid'
-              colorScheme='teal'
-              // background={bgColor[colorMode]}
-              opacity='80%'
-              leftIcon={<FaGithub />}
-            >
+            <Button variant='solid' colorScheme='teal' opacity='80%' leftIcon={<FaGithub />}>
               See Repository
             </Button>
           </Link>
@@ -144,16 +167,20 @@ export function RepoCard({ repoName, isRight }: Props) {
   }
 }
 
-function FadeOutText({ children, background }: BoxProps) {
+function FadeOutText({
+  children,
+  background,
+  ref,
+}: { ref?: RefObject<HTMLDivElement> } & BoxProps) {
   return (
-    <Box position='relative' overflow='hidden' height='100%'>
+    <Box position='relative' overflow='hidden' height='100%' ref={ref}>
       {children}
       <Box
         position='absolute'
         bottom='0'
         right='0'
         width='100%'
-        height='50%'
+        height='20%'
         bgGradient={`linear-gradient(to-t, ${background}, transparent)`}
         pointerEvents='none'
       />

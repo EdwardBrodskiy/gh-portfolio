@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { RefObject } from 'react'
 import { Box, BoxProps, Heading, Text, TextProps, HeadingProps, As } from '@chakra-ui/react'
 import { unified } from 'unified'
 import markdown from 'remark-parse'
 
 type Props = {
   markDown: String
+  ref?: RefObject<HTMLDivElement>
 }
 
 export function MarkDownSnippets({ markDown, ...rest }: Props & BoxProps) {
@@ -24,7 +25,7 @@ export function MarkDownSnippets({ markDown, ...rest }: Props & BoxProps) {
   )
 }
 
-export function MarkDownSnippet({ markDown, ...rest }: Props & BoxProps) {
+export function MarkDownSnippet({ markDown, ref, ...rest }: Props & BoxProps) {
   const processor = unified().use(markdown)
 
   const syntaxTree: any = processor.parse(markDown as string)
@@ -60,7 +61,11 @@ export function MarkDownSnippet({ markDown, ...rest }: Props & BoxProps) {
       }
     }
   }
-  return <Box>{elements}</Box>
+  return (
+    <Box ref={ref} {...rest}>
+      {elements}
+    </Box>
+  )
 }
 
 type RenderHeadingProps = {
