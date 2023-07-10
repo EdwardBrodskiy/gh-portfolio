@@ -112,7 +112,10 @@ export function RepoCard({ repoName, isRight }: Props) {
           direction={{ lg: 'inherit', base: 'column' }}
         >
           <Flex
-            p={{ lg: 8, base: 4 }}
+            // No padding on the bottom when we are fading out text
+            pt={{ lg: 8, base: 4 }}
+            px={{ lg: 8, base: 4 }}
+            pb={{ lg: 0, base: 4 }}
             textAlign={{ lg: isRight ? 'right' : 'left', base: 'left' }}
             direction='column'
             justify='space-between'
