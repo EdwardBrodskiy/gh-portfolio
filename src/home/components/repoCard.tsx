@@ -101,8 +101,6 @@ export function RepoCard({ repoName, isRight }: Props) {
     let buff = Buffer.from(data.content, 'base64')
     let text = buff.toString('ascii')
 
-    const posSeeRepo = isRight && isLargerThan992 ? { right: 4 } : { left: 4 }
-
     return (
       <Flex
         height={{ lg: '18em', base: '' }}
@@ -122,10 +120,15 @@ export function RepoCard({ repoName, isRight }: Props) {
           fallbackSrc={error_image}
           alt={`Preview for ${repoName}`}
         />
-        <Flex w='100%' justify='center'>
+        <Flex
+          w='100%'
+          justify='center'
+          textAlign='center'
+          direction={{ lg: 'inherit', base: 'column' }}
+        >
           <Flex
             p={4}
-            textAlign={{ lg: isRight ? 'right' : 'left' }}
+            textAlign={{ lg: isRight ? 'right' : 'left', base: 'left' }}
             direction='column'
             justify='space-between'
             w='100%'
@@ -144,24 +147,18 @@ export function RepoCard({ repoName, isRight }: Props) {
               )}
             </ErrorBoundary>
           </Flex>
-          {isLargerThan992 && isTextOverflowing && (
-            <Box position='absolute' bottom='4' className={styles.button}>
-              <IconButton aria-label='Show all' icon={<ChevronDownIcon />} opacity='80%' isRound />
-            </Box>
-          )}
+          <Box position={isLargerThan992 ? 'absolute' : undefined} bottom='4' p='4'>
+            <Link
+              href={`https://github.com/EdwardBrodskiy/${repoName}`}
+              target='_blank'
+              className={styles.button}
+            >
+              <Button variant='solid' colorScheme='teal' opacity='80%' leftIcon={<FaGithub />}>
+                See Repository
+              </Button>
+            </Link>
+          </Box>
         </Flex>
-
-        <Box position='absolute' top='4' {...posSeeRepo}>
-          <Link
-            href={`https://github.com/EdwardBrodskiy/${repoName}`}
-            target='_blank'
-            className={styles.button}
-          >
-            <Button variant='solid' colorScheme='teal' opacity='80%' leftIcon={<FaGithub />}>
-              See Repository
-            </Button>
-          </Link>
-        </Box>
       </Flex>
     )
   }
