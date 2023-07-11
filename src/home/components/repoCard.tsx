@@ -164,9 +164,14 @@ export function RepoCard({ repoName, isRight }: Props) {
               href={`https://github.com/EdwardBrodskiy/${repoName}`}
               target='_blank'
               className={styles.button}
-              px='2'
             >
-              <Button variant='solid' colorScheme='teal' opacity='80%' leftIcon={<FaGithub />}>
+              <Button
+                variant='solid'
+                colorScheme='teal'
+                opacity='80%'
+                leftIcon={<FaGithub />}
+                m='1'
+              >
                 See Repository
               </Button>
             </Link>
@@ -175,9 +180,14 @@ export function RepoCard({ repoName, isRight }: Props) {
                 href={`https://edwardbrodskiy.github.io/${repoName}/`}
                 target='_blank'
                 className={styles.button}
-                px='2'
               >
-                <Button variant='solid' colorScheme='orange' opacity='80%' leftIcon={<TbWorld />}>
+                <Button
+                  variant='solid'
+                  colorScheme='orange'
+                  opacity='80%'
+                  leftIcon={<TbWorld />}
+                  m='1'
+                >
                   See Site
                 </Button>
               </Link>
