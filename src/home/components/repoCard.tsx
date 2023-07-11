@@ -20,6 +20,7 @@ import styles from './repoCard.module.css'
 import store from 'store'
 import { RepoCardContent } from '../../types'
 import { FaGithub } from 'react-icons/fa'
+import { TbWorld } from 'react-icons/tb'
 
 type Props = {
   repoName: string
@@ -30,6 +31,7 @@ export function RepoCard({ repoName, isRight }: Props) {
   const [error, setError] = useState({ message: '' })
   const [isLoaded, setIsLoaded] = useState(false)
   const [data, setData] = useState({ content: '' })
+  const [isDeployed, setIsDeployed] = useState<boolean>(false)
 
   const { ref, inView } = useInView({ triggerOnce: true })
   const slideInAnimation = isRight ? styles.animateTileR : styles.animateTileL
@@ -37,9 +39,33 @@ export function RepoCard({ repoName, isRight }: Props) {
   const [isLargerThan992] = useMediaQuery('(min-width: 992px)') // 992 is lg
 
   useEffect(() => {
-    const repoCardContent: RepoCardContent = store.get(`repoCardContent-${repoName}`)
+    const repoCardContent: Partial<RepoCardContent> = store.get(`repoCardContent-${repoName}`)
+    if (repoCardContent === undefined || repoCardContent.isDeployed === undefined) {
+      fetch(`https://api.github.com/repos/EdwardBrodskiy/${repoName}/deployments`)
+        .then(function (response) {
+          if (!response.ok) {
+            throw Error(response.statusText)
+          }
+          return response
+        })
+        .then((res) => res.json())
+        .then(
+          (result: Array<any>) => {
+            setIsDeployed(result.length > 0)
+            store.set(`repoCardContent-${repoName}`, {
+              ...repoCardContent,
+              deploymentLink: result.length > 0,
+            })
+          },
+          (error) => {
+            console.log(`Error caught while trying to load deploy link for ${repoName}`)
+          },
+        )
+    }
     if (
       repoCardContent === undefined ||
+      repoCardContent.data === undefined ||
+      repoCardContent.accessTime === undefined ||
       new Date().getTime() - repoCardContent.accessTime > 30 * 60 * 1000
     ) {
       fetch(`https://api.github.com/repos/EdwardBrodskiy/${repoName}/contents/README.md`)
@@ -54,6 +80,7 @@ export function RepoCard({ repoName, isRight }: Props) {
           (result) => {
             setData(result)
             store.set(`repoCardContent-${repoName}`, {
+              ...repoCardContent,
               accessTime: new Date().getTime(),
               data: result,
             })
@@ -137,11 +164,24 @@ export function RepoCard({ repoName, isRight }: Props) {
               href={`https://github.com/EdwardBrodskiy/${repoName}`}
               target='_blank'
               className={styles.button}
+              px='2'
             >
               <Button variant='solid' colorScheme='teal' opacity='80%' leftIcon={<FaGithub />}>
                 See Repository
               </Button>
             </Link>
+            {isDeployed && (
+              <Link
+                href={`https://edwardbrodskiy.github.io/${repoName}/`}
+                target='_blank'
+                className={styles.button}
+                px='2'
+              >
+                <Button variant='solid' colorScheme='orange' opacity='80%' leftIcon={<TbWorld />}>
+                  See Site
+                </Button>
+              </Link>
+            )}
           </Box>
         </Flex>
       </Flex>

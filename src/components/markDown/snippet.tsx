@@ -32,7 +32,6 @@ export function MarkDownSnippet({ markDown, ref, ...rest }: Props & BoxProps) {
 
   let elements = []
   let foundHeading = false
-  console.log(syntaxTree)
   for (let index = 0; index < syntaxTree.children.length; index++) {
     let mditem = syntaxTree.children[index]
 
@@ -45,7 +44,6 @@ export function MarkDownSnippet({ markDown, ref, ...rest }: Props & BoxProps) {
         }
         foundHeading = true
         const level = mditem.depth || 1
-        console.log(text)
         elements.push(<RenderHeading key={index} text={text} level={level} />)
       } else if (foundHeading) {
         if (mditem.type == 'paragraph') {

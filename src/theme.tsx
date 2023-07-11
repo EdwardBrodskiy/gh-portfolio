@@ -7,6 +7,7 @@ export const customTheme = extendTheme({
         default: 'teal',
         _dark: 'teal.200',
       },
+      secondary: { default: '#cb7731' },
       background1: {
         default: 'gray.200',
         _dark: 'gray.700',

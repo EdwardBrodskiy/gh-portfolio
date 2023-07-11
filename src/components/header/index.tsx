@@ -19,7 +19,7 @@ export const Header = () => {
     >
       <Flex justify='space-between' align='center' w='100%' h='100%'>
         <Flex align='center' justify='space-evenly'>
-          <NavItem to='/' fontSize='3xl' as='i' color='primary'>
+          <NavItem to='/' fontSize={{ md: '3xl', sm: '2xl', base: 'xl' }} as='i' color='primary'>
             <TypingTitle>Edward Brodski's Portfolio</TypingTitle>
           </NavItem>
         </Flex>

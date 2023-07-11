@@ -28,16 +28,16 @@ export const PageMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const navs = [
-    <NavItem to='/' onClick={onClose}>
+    <NavItem to='/' key='/' onClick={onClose}>
       Home
     </NavItem>,
     config.aboutThisSite.show && (
-      <NavItem to='/about-this-site' onClick={onClose}>
+      <NavItem to='/about-this-site' key='/about-this-site' onClick={onClose}>
         About this site
       </NavItem>
     ),
     config.aboutMe.show && (
-      <NavItem to='/about-me' onClick={onClose}>
+      <NavItem to='/about-me' key='/about-me' onClick={onClose}>
         About me
       </NavItem>
     ),
@@ -63,17 +63,17 @@ export const PageMenu = () => {
         >
           <DrawerCloseButton />
 
-          <DrawerBody textAlign='center' p='8'>
-            <NavItem to='/' fontSize='3xl' color='primary' marginBottom='8' as='i'>
+          <DrawerBody textAlign='center' py='12' px='0'>
+            <NavItem
+              to='/'
+              fontSize={{ md: '3xl', base: '2xl' }}
+              color='primary'
+              marginBottom='8'
+              as='i'
+            >
               Edward Brodski's Portfolio
             </NavItem>
-            <Flex
-              direction='column'
-              paddingRight='4'
-              justifyContent='left'
-              textAlign='left'
-              alignItems='left'
-            >
+            <Flex direction='column' justifyContent='left' textAlign='left' alignItems='left'>
               {navs}
             </Flex>
           </DrawerBody>

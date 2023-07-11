@@ -3,6 +3,7 @@ export type RepoCardContent = {
   data: {
     content: string
   }
+  isDeployed: boolean
 }
 
 export type RepoListNames = {
