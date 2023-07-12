@@ -122,6 +122,7 @@ export function RepoCard({ repoName, isRight }: Props) {
         overflow='hidden'
         bg='background1'
         ref={ref}
+        opacity={inView ? 1 : 0}
         className={inView ? `${slideInAnimation} ${styles.card}` : styles.card}
         position='relative'
       >

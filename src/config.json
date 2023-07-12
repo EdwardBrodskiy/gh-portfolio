@@ -1,7 +1,7 @@
 {
   "repositories": {
-    "priorityRepos": ["digit_classifier", "Snake-ai","Color-Love", "MandelBrotSet","single-file-projects"],
-    "excludedRepos": ["ECS529", "gh-test", "EdwardBrodskiy", "gh-portfolio"]
+    "priorityRepos": ["Personalized-Finance-Assistant", "comparing_CFGs","Color-Love", "MandelBrotSet"],
+    "excludedRepos": ["ECS529", "EdwardBrodskiy", "gh-portfolio", "algorithms", "kilt-local-pool-cmd", "RC-Car", "rotatingRaster"]
   },
   "aboutMe": {
     "show": false
