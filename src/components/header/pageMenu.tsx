@@ -21,6 +21,7 @@ import { NavItem } from './NavItem'
 import config from '../../config.json'
 import { DarkModeToggle } from '../DarkMode'
 import { HamburgerIcon } from '@chakra-ui/icons'
+import { LinksCluster } from '../footer/linksCluster'
 
 export const PageMenu = () => {
   const [isLargerThan992] = useMediaQuery('(min-width: 992px)') // 992 is lg
@@ -79,7 +80,7 @@ export const PageMenu = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <DarkModeToggle />
+            <LinksCluster />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

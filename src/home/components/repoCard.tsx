@@ -54,7 +54,7 @@ export function RepoCard({ repoName, isRight }: Props) {
             setIsDeployed(result.length > 0)
             store.set(`repoCardContent-${repoName}`, {
               ...repoCardContent,
-              deploymentLink: result.length > 0,
+              isDeployed: result.length > 0,
             })
           },
           (error) => {
@@ -66,7 +66,7 @@ export function RepoCard({ repoName, isRight }: Props) {
       repoCardContent === undefined ||
       repoCardContent.data === undefined ||
       repoCardContent.accessTime === undefined ||
-      new Date().getTime() - repoCardContent.accessTime > 30 * 60 * 1000
+      new Date().getTime() - repoCardContent.accessTime > 60 * 60 * 1000 * 6
     ) {
       fetch(`https://api.github.com/repos/EdwardBrodskiy/${repoName}/contents/README.md`)
         .then(function (response) {

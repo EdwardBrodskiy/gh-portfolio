@@ -1,4 +1,12 @@
-import { extendTheme } from '@chakra-ui/react'
+import { ComponentStyleConfig, extendTheme } from '@chakra-ui/react'
+
+const ComponentStyles: Record<string, ComponentStyleConfig> = {
+  Button: {
+    baseStyle: {
+      opacity: '80%',
+    },
+  },
+}
 
 export const customTheme = extendTheme({
   semanticTokens: {
@@ -18,4 +26,5 @@ export const customTheme = extendTheme({
       },
     },
   },
+  components: ComponentStyles,
 })

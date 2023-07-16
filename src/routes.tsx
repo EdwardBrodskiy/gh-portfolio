@@ -1,15 +1,16 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import React from 'react'
-import {Route, Routes, useLocation} from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import { AboutThisSite } from './aboutThisSite'
 import { Header } from './components/header'
 import { Home } from './home'
 import { AboutMe } from './aboutMe'
 import config from './config.json'
+import { Footer } from './components/footer'
 
 const SiteRoutes = () => {
   return (
-    <Box bgGradient='linear(to-r, blue.200, grey.500)'>
+    <Flex minHeight='100vh' direction='column'>
       <Header />
       <Box m={4} mx={{ base: '5%', md: '10%' }}>
         <Routes>
@@ -26,7 +27,8 @@ const SiteRoutes = () => {
           )}
         </Routes>
       </Box>
-    </Box>
+      <Footer />
+    </Flex>
   )
 }
 

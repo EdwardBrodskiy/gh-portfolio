@@ -1,13 +1,13 @@
 {
   "repositories": {
-    "priorityRepos": ["Personalized-Finance-Assistant", "comparing_CFGs","Color-Love", "MandelBrotSet"],
-    "excludedRepos": ["ECS529", "EdwardBrodskiy", "gh-portfolio", "algorithms", "kilt-local-pool-cmd", "RC-Car", "rotatingRaster"]
+    "priorityRepos": ["Personalized-Finance-Assistant", "comparing_CFGs","Color-Love", "TrainerSkillsUni", "Fashion-House", "MandelBrotSet"],
+    "excludedRepos": ["ECS529", "EdwardBrodskiy", "gh-portfolio", "algorithms", "kilt-local-pool-cmd", "RC-Car", "rotatingRaster", "Wireless-Fencing-Box"]
   },
   "aboutMe": {
-    "show": false
+    "show": true
   },
   "aboutThisSite": {
-    "show": true,
+    "show": false,
     "text": "This website uses the github api to pull in all of my public repositories and displays them in a more presentable bite size manor."
   }
 }

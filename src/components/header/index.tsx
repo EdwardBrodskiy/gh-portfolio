@@ -13,7 +13,7 @@ export const Header = () => {
     <Box
       zIndex={1}
       p={4}
-      h='6rem'
+      minHeight='4rem'
       bgGradient={`linear(to-b, background1, background2)`}
       width='full'
     >

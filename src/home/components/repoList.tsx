@@ -72,7 +72,6 @@ export function RepoList() {
         {repoList.map((repoName, index) => (
           <ListItem key={repoName}>
             <ErrorBoundary>
-              {' '}
               {/* TODO: Add custom messages to error boundary */}
               <RepoCard repoName={repoName} isRight={!!(index % 2)} />
             </ErrorBoundary>
