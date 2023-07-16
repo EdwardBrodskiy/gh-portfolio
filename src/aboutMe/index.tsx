@@ -1,25 +1,29 @@
 import React from 'react'
-import { Box, Text, Heading, Image } from '@chakra-ui/react'
+import { Box, Text, Heading, Image, Flex, useMediaQuery } from '@chakra-ui/react'
 
 export function AboutMe() {
-  const margins = '3rem'
+  const [isLargerThan48] = useMediaQuery('(min-width: 48em)')
+  const margins = '5%'
+  const image_heading_order = [
+    <Image
+      src={process.env.PUBLIC_URL + '/me.jpg'}
+      float={{ sm: 'left', base: 'none' }}
+      w={{ lg: '35%', sm: '50%', base: '100%' }}
+      aspectRatio={{ lg: 'auto', base: 1 }}
+      objectFit='cover'
+      rounded='20'
+      mr={{ sm: margins, base: '0' }}
+      mb={margins}
+      filter='blur(10px)'
+    />,
+    <Heading as='h1' mb={4} size='2xl' p='8' width='auto' textAlign='center'>
+      About Me
+    </Heading>,
+  ]
   return (
     <Box textAlign='center'>
-      <Box mt='20' textAlign='left'>
-        <Image
-          src={process.env.PUBLIC_URL + '/me.jpg'}
-          float={{ sm: 'left', base: 'none' }}
-          w={{ lg: '35%', sm: '50%', base: '100%' }}
-          aspectRatio={{ lg: 'auto', base: 1 }}
-          objectFit='cover'
-          rounded='20'
-          mr={{ sm: margins, base: '0' }}
-          mb={margins}
-          filter='blur(10px)'
-        />
-        <Heading as='h1' mb={4} size='2xl' p='8' width='auto' textAlign='center'>
-          About Me
-        </Heading>
+      <Box mt={{ md: '20', base: '0' }} textAlign='left'>
+        {isLargerThan48 ? image_heading_order : image_heading_order.reverse()}
         <Text fontSize='lg' mb={margins}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur aliquam architecto
           reiciendis magnam, voluptates eius molestias minima distinctio maxime ut illum
