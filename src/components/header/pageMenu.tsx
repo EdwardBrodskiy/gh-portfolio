@@ -65,23 +65,28 @@ export const PageMenu = () => {
           <DrawerCloseButton />
 
           <DrawerBody textAlign='center' py='12' px='0'>
-            <NavItem
-              to='/'
-              fontSize={{ md: '3xl', base: '2xl' }}
-              color='primary'
-              marginBottom='8'
-              as='i'
-            >
-              Edward Brodski's Portfolio
-            </NavItem>
-            <Flex direction='column' justifyContent='left' textAlign='left' alignItems='left'>
-              {navs}
+            <Flex justify='space-between' direction='column' height='100%'>
+              <Flex direction='column'>
+                <NavItem
+                  to='/'
+                  fontSize={{ md: '3xl', base: '2xl' }}
+                  color='primary'
+                  marginBottom='8'
+                  as='i'
+                >
+                  Edward Brodski's Portfolio
+                </NavItem>
+                <Flex direction='column' justifyContent='left' textAlign='left' alignItems='left'>
+                  {navs}
+                </Flex>
+              </Flex>
+              <Box>
+                <LinksCluster />
+              </Box>
             </Flex>
           </DrawerBody>
 
-          <DrawerFooter>
-            <LinksCluster />
-          </DrawerFooter>
+          <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
     </Flex>
