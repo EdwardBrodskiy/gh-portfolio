@@ -16,16 +16,21 @@ export const LinksCluster = () => {
     >
       <Flex gap={3}>
         <Link
-          href='mailto:brodskiedward@gmail.com?subject=Message from Portfolio&body=Dear Edward'
+          href='mailto:brodskiedward@gmail.com?subject=Message from Portfolio&body=Dear Edward,\n\n'
           target='_blank'
         >
           <Button colorScheme='teal' variant='outline' leftIcon={<HiOutlineMail size='1.5em' />}>
             Contact Me
           </Button>
         </Link>
-        <Button colorScheme='orange' variant='outline' leftIcon={<FaRegFilePdf size='1.5em' />}>
-          See CV
-        </Button>
+        <Link
+          href='https://github.com/EdwardBrodskiy/Resume/blob/master/resume.pdf'
+          target='_blank'
+        >
+          <Button colorScheme='orange' variant='outline' leftIcon={<FaRegFilePdf size='1.5em' />}>
+            See CV
+          </Button>
+        </Link>
       </Flex>
       <Flex gap={3}>
         <Link href='https://www.linkedin.com/in/edward-brodski/' target='_blank'>

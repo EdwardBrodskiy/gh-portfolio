@@ -1,7 +1,7 @@
 {
   "repositories": {
-    "priorityRepos": ["Personalized-Finance-Assistant", "comparing_CFGs","Color-Love", "TrainerSkillsUni", "Fashion-House", "MandelBrotSet"],
-    "excludedRepos": ["ECS529", "EdwardBrodskiy", "gh-portfolio", "algorithms", "kilt-local-pool-cmd", "RC-Car", "rotatingRaster", "Wireless-Fencing-Box"]
+    "priorityRepos": ["Personalized-Finance-Assistant", "comparing_CFGs","Year4GroupProject", "Color-Love", "TrainerSkillsUni", "Fashion-House", "MandelBrotSet"],
+    "excludedRepos": ["ECS529", "EdwardBrodskiy", "gh-portfolio", "algorithms", "kilt-local-pool-cmd", "RC-Car", "rotatingRaster", "Wireless-Fencing-Box", "Resume"]
   },
   "aboutMe": {
     "show": true
