@@ -31,7 +31,7 @@
     "typescript": "~4.9.4",
     "unified": "^10.1.2"
   },
-  "homepage": "https://EdwardBrodskiy.gihub.io/gh-portfolio",
+  "homepage": "https://edwardbrodski.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

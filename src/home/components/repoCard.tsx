@@ -51,6 +51,7 @@ export function RepoCard({ repoName, isRight }: Props) {
         .then((res) => res.json())
         .then(
           (result: Array<any>) => {
+            console.log(`${repoName} - ${result.length}`)
             setIsDeployed(result.length > 0)
             store.set(`repoCardContent-${repoName}`, {
               ...repoCardContent,
