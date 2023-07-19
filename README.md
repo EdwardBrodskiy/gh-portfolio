@@ -1,4 +1,3 @@
 ## GitHub portfolio
 
-Portfolio website hosted with Github pages click [here](https://edwardbrodskiy.github.io/gh-portfolio/) to see the site.
-
+Portfolio website hosted with Github pages click [here](https://edwardbrodski.com) to see the site.
