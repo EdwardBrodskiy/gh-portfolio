@@ -6,9 +6,25 @@ const ComponentStyles: Record<string, ComponentStyleConfig> = {
       opacity: '80%',
     },
   },
+  Link: {
+    baseStyle: {},
+    variants: {
+      inline: {
+        fontWeight: 'normal',
+        textDecoration: 'none',
+        boxShadow: 'inset 0 -2px 0 var(--chakra-colors-primary)',
+        _hover: {
+          color: 'primary',
+          textDecoration: 'none',
+        },
+      },
+    },
+  },
 }
 
 export const customTheme = extendTheme({
+  initialColorMode: 'system',
+  useSystemColorMode: true,
   semanticTokens: {
     colors: {
       primary: {
