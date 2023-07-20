@@ -18,7 +18,7 @@ import { Buffer } from 'buffer'
 import { useInView } from 'react-intersection-observer'
 import styles from './repoCard.module.css'
 import store from 'store'
-import { RepoCardContent } from '../../types'
+import { RepoCardContent, RepoCardDeployment } from '../../types'
 import { FaGithub } from 'react-icons/fa'
 import { TbWorld } from 'react-icons/tb'
 
@@ -39,8 +39,15 @@ export function RepoCard({ repoName, isRight }: Props) {
   const [isLargerThan992] = useMediaQuery('(min-width: 992px)') // 992 is lg
 
   useEffect(() => {
-    const repoCardContent: Partial<RepoCardContent> = store.get(`repoCardContent-${repoName}`)
-    if (repoCardContent === undefined || repoCardContent.isDeployed === undefined) {
+    const repoCardDeployment: Partial<RepoCardDeployment> = store.get(
+      `repoCardDeployment-${repoName}`,
+    )
+    if (
+      repoCardDeployment === undefined ||
+      repoCardDeployment.isDeployed === undefined ||
+      repoCardDeployment.accessTime === undefined ||
+      new Date().getTime() - repoCardDeployment.accessTime > 60 * 60 * 1000 * 6
+    ) {
       fetch(`https://api.github.com/repos/EdwardBrodskiy/${repoName}/deployments`)
         .then(function (response) {
           if (!response.ok) {
@@ -51,10 +58,9 @@ export function RepoCard({ repoName, isRight }: Props) {
         .then((res) => res.json())
         .then(
           (result: Array<any>) => {
-            console.log(`${repoName} - ${result.length}`)
             setIsDeployed(result.length > 0)
-            store.set(`repoCardContent-${repoName}`, {
-              ...repoCardContent,
+            store.set(`repoCardDeployment-${repoName}`, {
+              accessTime: new Date().getTime(),
               isDeployed: result.length > 0,
             })
           },
@@ -62,7 +68,11 @@ export function RepoCard({ repoName, isRight }: Props) {
             console.log(`Error caught while trying to load deploy link for ${repoName}`)
           },
         )
+    } else {
+      console.log(`Used Local Storage for Deployment status in ${repoName}`)
+      setIsDeployed(repoCardDeployment.isDeployed)
     }
+    const repoCardContent: Partial<RepoCardContent> = store.get(`repoCardContent-${repoName}`)
     if (
       repoCardContent === undefined ||
       repoCardContent.data === undefined ||
@@ -81,7 +91,6 @@ export function RepoCard({ repoName, isRight }: Props) {
           (result) => {
             setData(result)
             store.set(`repoCardContent-${repoName}`, {
-              ...repoCardContent,
               accessTime: new Date().getTime(),
               data: result,
             })
@@ -94,7 +103,7 @@ export function RepoCard({ repoName, isRight }: Props) {
           },
         )
     } else {
-      console.log(`Used Local Storage for ${repoName}`)
+      console.log(`Used Local Storage for Content in ${repoName}`)
       setData(repoCardContent.data)
       setIsLoaded(true)
     }
