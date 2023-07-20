@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Button, Link } from '@chakra-ui/react'
+import { Flex, Button, Link, Box } from '@chakra-ui/react'
 import { DarkModeToggle } from '../DarkMode'
 import { FaGithub, FaLinkedin, FaRegFilePdf } from 'react-icons/fa'
 import { HiOutlineMail } from 'react-icons/hi'
@@ -15,7 +15,7 @@ export const LinksCluster = () => {
       direction={{ md: 'row', base: 'column' }}
       gap='3'
     >
-      <Flex gap={3}>
+      <Flex gap={3} flexWrap='wrap' justify='center' w={{ md: '', base: '100%' }}>
         <Link
           href='mailto:brodskiedward@gmail.com?subject=Message from Portfolio&body=Hi Edward,'
           target='_blank'
@@ -33,7 +33,7 @@ export const LinksCluster = () => {
           </Button>
         </Link>
       </Flex>
-      <Flex gap={3}>
+      <Flex gap={3} flexWrap='wrap' justify='center' w={{ md: '', base: '100%' }}>
         <Link href='https://www.printables.com/@Edward' target='_blank'>
           <Button colorScheme='orange' leftIcon={<SiPrintables size='1.5em' />}>
             Printables
@@ -49,7 +49,9 @@ export const LinksCluster = () => {
             Git Hub
           </Button>
         </Link>
-        <DarkModeToggle />
+        <Box>
+          <DarkModeToggle />
+        </Box>
       </Flex>
     </Flex>
   )
